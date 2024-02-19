@@ -83,6 +83,39 @@ void	add_client(t_client *data, int *nbr_client)
 	}
 }
 
+void	delete_client(t_client *data, int *nb)
+{
+	string c;
+	cout << "----------------------------------\n";
+	cout << setw(5) << "Delete Client Screen\n";
+	cout << "----------------------------------\n";
+	cout << "Please enter Account Number\n";
+	cin >> c;
+	int i = 0;
+	while (i < *nb)
+	{
+		if (data[i].id == c)
+		{
+			cout << "The following are the client delaits :\n";
+			cout << "Account Number" <<setw(4) << data[i].id << "\n";
+			cout << "Pin Code" <<setw(4) << data[i].pin << "\n";
+			cout << "Name" <<setw(4) << data[i].name << "\n";
+			cout << "Phone" <<setw(4) << data[i].phone << "\n";
+			cout << "Account balance" <<setw(4) << data[i].id << "\n";
+			data[i].pin = "0";
+			data[i].balance = "0";
+			data[i].name = "0";
+			data[i].phone = "0";
+			data[i].id = "0";
+			return ;
+		}
+		i++;
+	}
+	if (i == *nb)
+		cout << "Client with Account Number (" << c << ") is Not Found!\n";
+	cout << "Press any key to go back to Main Menue? ...\n";
+}
+
 int main()
 {
 	char	nb;
@@ -97,6 +130,8 @@ int main()
             show_clients(data, nbr_cline);
         else if (nb == 2)
             add_client(data, &nbr_cline);
-			i++;
+		else if (nb == 3)
+			delete_client(data, &nbr_cline);
+		i++;
     } while (nb != 6);
 }
