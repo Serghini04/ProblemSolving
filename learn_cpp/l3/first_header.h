@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <fstream>
+#include <iomanip>
 // auto is type variable ..
 //g++ -std=c++11 testheder.cpp
 //int randNum = rand() % (To - From + 1) + From;
@@ -34,7 +35,7 @@ namespace mylib
 		while (cin.fail())
 		{
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			//cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			cout <<  BOLDRED<< "invalid number, enter a valid one: \n" << RESET;
 			cin >> i;
 		}
