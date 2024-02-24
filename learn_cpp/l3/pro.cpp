@@ -24,24 +24,17 @@ int start()
     printf("[6] Exit.\n");
     printf("=============================\n");
 	cout << "Choose what do you want to do ?[1 to 6]?";
-    while (!(cin >> nb) || nb < 1 || nb > 6)
-    {
-        if (cin.fail())
-        {
-            cout << "Invalid input. Please enter a number between 1 and 6: ";
-            cin.clear();  // Clear the error flag
-        //    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear input buffer
-        }
-        else
-            cout << "Invalid input. Please enter a valid number between 1 and 6: ";
-    }
-    //cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear input buffer
+	do
+	{
+		cin >> nb;
+	} while (!(nb >= 1 && nb <= 6));
+	
     return nb;
 }
 
 void show_clients(const vector<t_client>& data)
 {
-    char c;
+    string c;
     system("clear");
     cout << setw(40) << "Client List (" << data.size() << ") Client(s).\n";
     cout << "---------------------------------------------------------------------------\n";
@@ -57,7 +50,7 @@ void show_clients(const vector<t_client>& data)
 
 void	add_client(vector<t_client>& data)
 {
-	char c;
+	string c;
 	while (1)
 	{
 		t_client info;
@@ -79,7 +72,7 @@ void	add_client(vector<t_client>& data)
 		cout << "Client Added Successfully, do you want to add more clients? (y/n)\n";
 		data.push_back(info);
 		cin >> c;
-		if (c != 'y')
+		if (c != "y")
 			break;
 	}
 }
@@ -91,7 +84,6 @@ void info_client(t_client& data)
 	cout << "Name" <<setw(10) << ":"  << data.name << "\n";
 	cout << "Phone" <<setw(9) << ":"  << data.phone << "\n";
 	cout << "Account balance" <<setw(4) << ":"  << data.id << "\n";
-	cout << "Are you sure you want update this client? (y/n)?\n";
 }
 void	delete_client(vector<t_client>& data)
 {
@@ -103,18 +95,18 @@ void	delete_client(vector<t_client>& data)
 	cout << "Please enter Account Number\n";
 	cin >> c;
 	int v = 0;
-	char input;
+	string input;
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
 		if (it->id == c)
 		{
 			info_client(*it);
 			cout << "Are you sure you want delete this client? (y/n)\n";
+			v = 1;
 			cin >> input;
-			if (input == 'n')
+			if (input != "y")
 				break;
 			data.erase(it);
-			v = 1;
 			break ;
 		}
 	}
@@ -249,7 +241,7 @@ void save_update(vector<t_client>& data)
 	for (t_client& info : data)
 	{
 		line = str_join(info);
-		fd << line << line;
+		fd << line << endl;
 	}
 	fd.close();
 }
