@@ -18,6 +18,7 @@ using namespace std;
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 #define RESET   "\033[0m"
 
+
 namespace mylib
 {
 	void test()

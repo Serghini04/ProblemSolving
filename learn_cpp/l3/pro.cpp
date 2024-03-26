@@ -2,11 +2,11 @@
 
 typedef struct s_client
 {
-	string id;
-	string name;
-	string pin;
+	string	id;
+	string	name;
+	string	pin;
 	string	phone;
-	string		balance;
+	int		balance;
 }t_client;
 
 int start()
@@ -21,14 +21,15 @@ int start()
     printf("[3] Delete Client.\n");
     printf("[4] Update Client Info.\n");
     printf("[5] Find Client.\n");
-    printf("[6] Exit.\n");
+	printf("[6] Transactions.\n");
+    printf("[7] Exit.\n");
     printf("=============================\n");
-	cout << "Choose what do you want to do ?[1 to 6]?";
+	cout << "Choose what do you want to do ?[1 to 7]?";
 	do
 	{
 		cin >> nb;
-	} while (!(nb >= 1 && nb <= 6));
-	
+	} while (!(nb >= 1 && nb <= 7));
+
     return nb;
 }
 
@@ -64,7 +65,7 @@ void	add_client(vector<t_client>& data)
 		cout << "Enter Pin Code? ";
 		cin >> info.pin;
 		cout << "Enter Name? ";
-		cin >> info.name;
+		getline(cin, info.name);
 		cout << "Enter Phone? ";
 		cin >> info.phone;
 		cout << "Enter Accout balance? ";
@@ -79,11 +80,13 @@ void	add_client(vector<t_client>& data)
 void info_client(t_client& data)
 {
 	cout << "The following are the client delaits :\n";
-	cout << "Account Number" <<setw(4) << ":" << data.id << "\n";
-	cout << "Pin Code" <<setw(7) << ":"  << data.pin << "\n";
-	cout << "Name" <<setw(10) << ":"  << data.name << "\n";
-	cout << "Phone" <<setw(9) << ":"  << data.phone << "\n";
-	cout << "Account balance" <<setw(4) << ":"  << data.id << "\n";
+	cout << "--------------------------------------------\n";
+	cout << "Account Number " << ": " <<setw(4) << data.id << "\n";
+	cout << "Pin Code   " << ":" <<setw(7) << data.pin << "\n";
+	cout << "Name   " << ":" <<setw(10)  << data.name << "\n";
+	cout << "Phone  " << ":" <<setw(9)  << data.phone << "\n";
+	cout << "Account balance" << ":" <<setw(4)  << data.balance << "\n";
+	cout << "--------------------------------------------\n";
 }
 void	delete_client(vector<t_client>& data)
 {
@@ -143,7 +146,7 @@ void update_info(vector<t_client>& data)
 			cout << "Enter Phone? ";
 			cin >> it->phone;
 			cout << "Enter Accout balance? ";
-			cin >> it->balance;	
+			cin >> it->balance;
 			cout << "Client update successfully\n";
 			break;
 		}
@@ -211,7 +214,7 @@ void read_form_file(vector<t_client>& data)
 			fill.name = info[1];
 			fill.pin = info[2];
 			fill.phone = info[3];
-			fill.balance = info[4];
+			fill.balance = stoi(info[4]);
 			data.push_back(fill);
 		}
 		fd.close();
@@ -224,7 +227,7 @@ string str_join(t_client& data)
 	line = line + data.name + ">>>";
 	line = line + data.pin + ">>>";
 	line = line + data.phone + ">>>";
-	line = line + data.balance;
+	line = line + to_string(data.balance);
 	return (line);
 }
 
@@ -244,6 +247,126 @@ void save_update(vector<t_client>& data)
 		fd << line << endl;
 	}
 	fd.close();
+}
+void	deposit(vector<t_client> &data)
+{
+	string	input;
+	int		nb;
+	string	conf;
+	system("clear");
+	cout << "------------------------------\n";
+	cout << "	Deposit Screen\n";
+	cout << "------------------------------\n";
+	cout << "Please enter Account Number?\n";
+	cin >> input;
+	for (auto it = data.begin(); it != data.end(); ++it)
+	{
+		if (input == it->id)
+		{
+			info_client(*it);
+			cout << "Please enter deposit amount?\n";
+			cin >> nb;
+			cout << "Are you sure you want perfrom this transaction? (y/n)\n";
+			cin >> conf;
+			if (conf == "y")
+			{
+				it->balance	+= nb;
+				update_info(data);
+			}
+			return ;
+		}
+	}
+	cout << "Clinet not found ...\n";
+	cout << "Press any key to go back to Main Menue? ...\n";
+	cin >> input;
+}
+void	total_balances(vector<t_client> &data)
+{
+	system ("clear");
+	int sum = 0;
+	cout <<	"	Balances List (" << data.size() << ") Client(s).\n";
+	cout << "--------------------------------------------------\n";
+	cout << "|  Account Number |  Client Name  |  Balance\n";
+	cout << "--------------------------------------------------\n";
+	for (auto it = data.begin(); it != data.end(); it++)
+	{
+		cout << "|" << setw(4) << it->id << setw(10)  << "|" << setw(10) << it->name << setw(6) << "|" << setw(10) << it->balance << endl;
+		sum += it->balance;
+	}
+	cout << "--------------------------------------------------\n";
+	cout << "			Total Balances = " << sum << endl;
+	cout << "Press any key to go back to Transactions Menue ..." << endl;
+	string in;
+	cin >> in;
+}
+void withdraw(vector<t_client> &data)
+{
+	string	input;
+	int		nb;
+	string	conf;
+	system("clear");
+	cout << "------------------------------\n";
+	cout << "	Withdraw Screen\n";
+	cout << "------------------------------\n";
+	cout << "Please enter Account Number?\n";
+	cin >> input;
+	for (auto it = data.begin(); it != data.end(); ++it)
+	{
+		if (input == it->id)
+		{
+			info_client(*it);
+			do{
+				cout << "Please enter withdraw amount?\n";
+				cin >> nb;
+				if (nb > it->balance)
+					cout << "Amount Exceeds the balance, you can withdraw up to :" << it->balance << endl;
+				else
+					break;
+			} while (1);
+			cout << "Are you sure you want perfrom this transaction? (y/n)\n";
+			cin >> conf;
+			if (conf == "y")
+			{
+				it->balance	-= nb;
+				update_info(data);
+			}
+			return ;
+		}
+	}
+	cout << "Clinet not found ...\n";
+	cout << "Press any key to go back to Main Menue? ...\n";
+	cin >> input;
+}
+
+void transaction(vector<t_client>& data)
+{
+    int nb;
+
+    do {
+        system("clear");
+        cout << "====================================\n";
+        cout << "    Transactions Menue Screen\n";
+        cout << "====================================\n";
+        cout << "[1] Deposit.\n";
+        cout << "[2] Withdraw.\n";
+        cout << "[3] Total Balances.\n";
+        cout << "[4] Main Menue.\n";
+        cout << "====================================\n";
+        cout << "Choose what do you want to do? [1 to 4]?\n";
+		cin >> nb;
+        // Check if cin failed
+        if (cin.fail()) {
+            cin.clear(); // clear the error state
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the bad input
+            continue; // skip the rest of the loop
+        }
+        if (nb == 1)
+            deposit(data);
+		else if (nb == 2)
+			withdraw(data);
+		else if (nb == 3)
+			total_balances(data);
+    } while (nb != 4);
 }
 
 int main()
@@ -265,7 +388,10 @@ int main()
 			update_info(data);
 		else if (nb == 5)
 			find_client(data);
-    } while (nb != 6);
+		else if (nb == 6)
+			transaction(data);
+    } while (nb != 7);
+	printf("555\n");
 	system("clear");
 	save_update(data);
 	cout << "=================================\n";
