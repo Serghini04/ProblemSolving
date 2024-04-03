@@ -391,7 +391,6 @@ int main()
 		else if (nb == 6)
 			transaction(data);
     } while (nb != 7);
-	printf("555\n");
 	system("clear");
 	save_update(data);
 	cout << "=================================\n";
