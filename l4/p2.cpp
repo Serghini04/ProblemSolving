@@ -1,4 +1,5 @@
 #include "../l3/first_header.h"
+
 typedef struct s_data
 {
 	int day;
@@ -54,6 +55,12 @@ void	if_last_day_in_Month(t_data data)
 		cout << "No, Day is not last day in month\n";
 }
 
+t_data	add_years(int nb, t_data data)
+{
+	data.year += nb;
+	return (data);
+}
+
 t_data	add_days(int days, t_data data)
 {
 	int nb_days_month = number_days_month(data.month, data.year);
@@ -62,7 +69,7 @@ t_data	add_days(int days, t_data data)
 		if (data.day == nb_days_month)
 		{
 			data.month++;
-			if (data.month == 13)
+			if (data.month >= 13)
 			{
 				data.month = 1;
 				data.year++;
@@ -83,7 +90,7 @@ t_data sub_days(int nb, t_data data)
 {
 	while (nb != 0)
 	{
-		if (data.day == 0)
+		if (data.day <= 0)
 		{
 			data.month--;
 			if (data.month == 0)
@@ -126,11 +133,112 @@ t_data get_date()
 	data.day = now->tm_mday;
 	return (data);
 }
+
+void print_data(t_data data)
+{
+	cout << ", " << data.day << "/" << data.month << "/" << data.year << endl;
+}
+
+t_data add_month(int months, t_data data)
+{
+	short	nb_days;
+	while (months)
+	{
+		if (data.month == 12)
+		{
+			data.month = 1;
+			data.year++;
+		}
+		nb_days = number_days_month(data.month, data.year);
+		data = add_days(nb_days, data);
+		months--;
+	}
+	return (data);
+}
+
+short	nb_day_of_week(t_data data)
+{
+	short a, y, m;
+	a = (14 - data.month) / 12;
+	y = data.year - a;
+	m = data.month + (12 * a) - 2;
+	// Gregorian:
+	// 0:sun, 1: Mon, 2:Tue, ... etc.
+	return (data.day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
+}
+
+bool	IsEndOfWeek(t_data data)
+{
+	return (nb_day_of_week(data) == 0);
+}
+
+bool	IsWeekend(t_data data)
+{
+	int nb = nb_day_of_week(data);
+	return (nb == 6 || nb == 0);
+}
+
+string print_day_short(t_data data)
+{
+	string days[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+	return (days[nb_day_of_week(data)]);
+}
+
+bool IsBusinessDay(t_data data)
+{
+	return (!IsEndOfWeek(data));
+}
+
+int	DaysUntilTheEndOfWeek(t_data data)
+{
+	return (7 - nb_day_of_week(data));
+}
+
+int DayUntilTheEndOfMonth(t_data data)
+{
+	int days = number_days_month(data.month, data.year);
+	return ((days - data.day) + 1);
+}
+
+int	DayUntilTheEndOfYear(t_data data)
+{
+	int count = number_days_month(data.month, data.year) - data.day; 
+	while (data.month < 12)
+	{
+		count += number_days_month(data.month + 1, data.year);
+		data.month++;
+	}
+	return (count + 1);
+}
+
+t_data get_date_end(t_data data,int days_vacation)
+{
+ 	data = add_days(DaysUntilTheEndOfWeek(data), data);
+	return (add_days(days_vacation + 8, data));
+}
+
 int main()
 {
-	t_data data1 = read_data();
-	int days;
-	cin >> days;
-	data1 = sub_days(days, data1);
-	cout << "sub days is : " << data1.day << "/" << data1.month << "/" << data1.year;
+	t_data data = get_date();
+	cout << "Today is " << print_day_short(data);
+	print_data(data);
+	cout << "\nIs it End of Week?\n";
+	if (!IsEndOfWeek(data))
+		cout << "No it's Not end of week.\n";
+	else
+		cout << "Yes it's end of week.\n";
+	cout << "\nIt's Weekend?\n";
+	if (IsWeekend(data))
+		cout << "Yes it's a week end.\n";
+	else
+		cout << "No it's not a week end.\n";
+	cout << "\nIt's Business day?\n";
+	if (IsBusinessDay(data))
+		cout << "Yes it's a business day.\n";
+	else
+		cout << "No it's Not a business day.\n";
+	cout << "\nDays unit end of Week : " <<DaysUntilTheEndOfWeek(data)<< " Day(s).\n";
+	cout << "Days unit end of Month : " <<DayUntilTheEndOfMonth(data)<< " Day(s).\n";
+	cout << "Days unit end of year : " <<DayUntilTheEndOfYear(data)<< " Day(s).\n";
+	return 0;
 }
