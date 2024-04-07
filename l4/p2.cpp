@@ -7,6 +7,12 @@ typedef struct s_data
 	int year;
 }t_data;
 
+typedef struct s_period
+{
+	t_data start;
+	t_data end;
+}	t_period;
+
 int	is_leap_year(int nb)
 {
 	return ((nb % 4 == 0 && (nb % 100 != 0 || nb % 400 == 0)));
@@ -217,28 +223,92 @@ t_data get_date_end(t_data data,int days_vacation)
 	return (add_days(days_vacation + 8, data));
 }
 
+
+
+bool IsDate1BeforeDate2(t_data Date1, t_data Date2)
+{
+	return  (Date1.year < Date2.year) ? true : ((Date1.year == Date2.year) ? (Date1.month < Date2.month ? true : (Date1.month == Date2.month ? Date1.day < Date2.day : false)) : false); 
+}
+bool IsDate1EqualDate2(t_data Date1, t_data Date2)
+{
+	return  (Date1.year == Date2.year) ? ((Date1.month == Date2.month) ? ((Date1.day == Date2.day) ? true : false) : false) : false;
+}
+bool IsDate1AfterDate2(t_data Date1, t_data Date2)
+{
+	return (!IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualDate2(Date1, Date2));
+} 
+
+
+int	cmp_two_date(t_data data1, t_data data2)
+{
+	if (IsDate1AfterDate2(data1, data2))
+		return (1);
+	else if (IsDate1BeforeDate2(data1, data2))
+		return (-1);
+	else
+		return (0);
+}
+
+bool	is_period_overlap(t_period data1, t_period data2)
+{
+	//cmp_two_date(data2.end, data1.start) == -1 ==> 2.end < 1.start
+	if (cmp_two_date(data2.end, data1.start) == -1 || cmp_two_date(data2.start, data1.end) == 1)
+		return (false);
+	return (true);
+}
+
+bool isDateInPeriod(t_data Date, t_period Period)
+{
+	return !(cmp_two_date(Date, Period.start) == -1 || cmp_two_date(Date, Period.end) == 1); 
+}
+
+int	count_peroid_overlap(t_period data1, t_period data2)
+{
+	if(!is_period_overlap(data1, data2))
+		return (0);
+	if (isDateInPeriod(data2.start, data1))
+		return (cout << "\nha ana\n", data_diff_days(data2.start, data1.end));
+	else
+		return (cout <<"\nmachi ana\n", data_diff_days(data1.start, data2.end));
+}
+
+
+// int main()
+// {
+// 	t_data data = get_date();
+// 	cout << "Today is " << print_day_short(data);
+// 	print_data(data);
+// 	cout << "\nIs it End of Week?\n";
+// 	if (!IsEndOfWeek(data))
+// 		cout << "No it's Not end of week.\n";
+// 	else
+// 		cout << "Yes it's end of week.\n";
+// 	cout << "\nIt's Weekend?\n";
+// 	if (IsWeekend(data))
+// 		cout << "Yes it's a week end.\n";
+// 	else
+// 		cout << "No it's not a week end.\n";
+// 	cout << "\nIt's Business day?\n";
+// 	if (IsBusinessDay(data))
+// 		cout << "Yes it's a business day.\n";
+// 	else
+// 		cout << "No it's Not a business day.\n";
+// 	cout << "\nDays unit end of Week : " <<DaysUntilTheEndOfWeek(data)<< " Day(s).\n";
+// 	cout << "Days unit end of Month : " <<DayUntilTheEndOfMonth(data)<< " Day(s).\n";
+// 	cout << "Days unit end of year : " <<DayUntilTheEndOfYear(data)<< " Day(s).\n";
+// 	return 0;
+// }
+
+
 int main()
 {
-	t_data data = get_date();
-	cout << "Today is " << print_day_short(data);
-	print_data(data);
-	cout << "\nIs it End of Week?\n";
-	if (!IsEndOfWeek(data))
-		cout << "No it's Not end of week.\n";
-	else
-		cout << "Yes it's end of week.\n";
-	cout << "\nIt's Weekend?\n";
-	if (IsWeekend(data))
-		cout << "Yes it's a week end.\n";
-	else
-		cout << "No it's not a week end.\n";
-	cout << "\nIt's Business day?\n";
-	if (IsBusinessDay(data))
-		cout << "Yes it's a business day.\n";
-	else
-		cout << "No it's Not a business day.\n";
-	cout << "\nDays unit end of Week : " <<DaysUntilTheEndOfWeek(data)<< " Day(s).\n";
-	cout << "Days unit end of Month : " <<DayUntilTheEndOfMonth(data)<< " Day(s).\n";
-	cout << "Days unit end of year : " <<DayUntilTheEndOfYear(data)<< " Day(s).\n";
-	return 0;
+	t_period data1;
+	t_period data2;
+	cout << "Enter Peroid 1:\n";
+	data1.start = read_data();
+	data1.end = read_data();
+	cout << "\nEnter Peroid 1:\n";
+	data2.start = read_data();
+	data2.end = read_data();
+	cout << "Days : " << count_peroid_overlap(data1, data2) << endl;
 }
