@@ -40,49 +40,71 @@ int start()
     return nb;
 }
 
-void show_clients(const vector<t_client>& data)
+void access_denied()
+{
+	cout << "==============================\n";
+	cout << "Access Denied,\n";
+	cout << "You dont have Permission to do this,\n";
+	cout << "Please conact your Admin.\n";
+	cout << "==============================\n";
+}
+
+void show_clients(const vector<t_client>& data, t_user input)
 {
     string c;
     system("clear");
-    cout << setw(40) << "Client List (" << data.size() << ") Client(s).\n";
-    cout << "---------------------------------------------------------------------------\n";
-    cout << "| Account Number | Pin Code | Client Name       | Phone          | Balance\n";
-    cout << "---------------------------------------------------------------------------\n";
-    for (const t_client& info : data)
-    {
-        cout << "|" << setw(15) << info.id << "|" << setw(10) << info.pin << "|" << setw(22) << info.name << "|" << setw(14) << info.phone << "|" << setw(8) << info.balance << "\n";
-    }
+	if ((input.per & 1) != 1)
+		access_denied();
+	else
+	{
+		cout << setw(40) << "Client List (" << data.size() << ") Client(s).\n";
+		cout << "---------------------------------------------------------------------------\n";
+		cout << "| Account Number | Pin Code | Client Name       | Phone          | Balance\n";
+		cout << "---------------------------------------------------------------------------\n";
+		for (const t_client& info : data)
+		{
+			cout << "|" << setw(15) << info.id << "|" << setw(10) << info.pin << "|" << setw(22) << info.name << "|" << setw(14) << info.phone << "|" << setw(8) << info.balance << "\n";
+		}
+	}
     cout << "Press any Key to go back to Main Menu ....\n";
     cin >> c;
 }
 
-void	add_client(vector<t_client>& data)
+void	add_client(vector<t_client>& data, t_user &input)
 {
 	string c;
-	while (1)
+	system ("clear");
+	if ((input.per & 2) != 2)
+		access_denied();
+	else
 	{
-		t_client info;
-		system ("clear");
-		cout << "--------------------------------------------\n";
-		cout << "	Add New Clients Screen\n";
-		cout << "--------------------------------------------\n";
-		cout << "Adding New Client:\n";
-		cout << "Enter Account Number? ";
-		cin >> info.id;
-		cout << "Enter Pin Code? ";
-		cin >> info.pin;
-		cout << "Enter Name? ";
-		cin >> info.name;
-		cout << "Enter Phone? ";
-		cin >> info.phone;
-		cout << "Enter Accout balance? ";
-		cin >> info.balance;
-		cout << "Client Added Successfully, do you want to add more clients? (y/n)\n";
-		data.push_back(info);
-		cin >> c;
-		if (c != "y")
-			break;
+		while (1)
+		{
+			t_client info;
+			system ("clear");
+			cout << "--------------------------------------------\n";
+			cout << "	Add New Clients Screen\n";
+			cout << "--------------------------------------------\n";
+			cout << "Adding New Client:\n";
+			cout << "Enter Account Number? ";
+			cin >> info.id;
+			cout << "Enter Pin Code? ";
+			cin >> info.pin;
+			cout << "Enter Name? ";
+			cin >> info.name;
+			cout << "Enter Phone? ";
+			cin >> info.phone;
+			cout << "Enter Accout balance? ";
+			cin >> info.balance;
+			cout << "Client Added Successfully, do you want to add more clients? (y/n)\n";
+			data.push_back(info);
+			cin >> c;
+			if (c != "y")
+				break;
+		}
 	}
+	cout << "Press any key to go back to Main Menue ...\n";
+	cin >> c;
 }
 void info_client(t_client& data)
 {
@@ -95,94 +117,111 @@ void info_client(t_client& data)
 	cout << "Account balance" << ":" <<setw(4)  << data.balance << "\n";
 	cout << "--------------------------------------------\n";
 }
-void	delete_client(vector<t_client>& data)
+void	delete_client(vector<t_client>& data, t_user &input)
 {
 	string c;
 	system("clear");
-	cout << "----------------------------------\n";
-	cout << setw(5) << "Delete Client Screen\n";
-	cout << "----------------------------------\n";
-	cout << "Please enter Account Number\n";
-	cin >> c;
-	int v = 0;
-	string input;
-	for (auto it = data.begin(); it != data.end(); ++it)
+	if ((input.per & 4) != 4)
+		access_denied();
+	else
 	{
-		if (it->id == c)
+		cout << "----------------------------------\n";
+		cout << setw(5) << "Delete Client Screen\n";
+		cout << "----------------------------------\n";
+		cout << "Please enter Account Number\n";
+		cin >> c;
+		int v = 0;
+		string input;
+		for (auto it = data.begin(); it != data.end(); ++it)
 		{
-			info_client(*it);
-			cout << "Are you sure you want delete this client? (y/n)\n";
-			v = 1;
-			cin >> input;
-			if (input != "y")
-				break;
-			data.erase(it);
-			break ;
+			if (it->id == c)
+			{
+				info_client(*it);
+				cout << "Are you sure you want delete this client? (y/n)\n";
+				v = 1;
+				cin >> input;
+				if (input != "y")
+					break;
+				data.erase(it);
+				break ;
+			}
 		}
+		if (v == 0)
+			cout << "Client with Account Number (" << c << ") is Not Found!\n";
+
 	}
-	if (v == 0)
-		cout << "Client with Account Number (" << c << ") is Not Found!\n";
 	string n;
 	cout << "Press any key to go back to Main Menue? ...\n";
 	cin >> n;
 }
 
 
-void update_info(vector<t_client>& data)
+void update_info(vector<t_client>& data, t_user &input)
 {
-	string input;
+	string c;
 	system("clear");
-	cout << "----------------------------------\n";
-	cout << setw(5) << "Update Client Info Screen\n";
-	cout << "----------------------------------\n";
-	cout << "Please enter Account Number?\n";
-	cin >> input;
-	for(auto it = data.begin(); it != data.end(); ++it)
+	if ((input.per & 8) != 8)
+		access_denied();
+	else
 	{
-		if (input == it->id)
+		cout << "----------------------------------\n";
+		cout << setw(5) << "Update Client Info Screen\n";
+		cout << "----------------------------------\n";
+		cout << "Please enter Account Number?\n";
+		cin >> c;
+		for(auto it = data.begin(); it != data.end(); ++it)
 		{
-			info_client(*it);
-			char c;
-			cout << "Are you sure you want update this client? (y/n)\n";
-			cin >> c;
-			if (c == 'n')
+			if (c == it->id)
+			{
+				info_client(*it);
+				char c;
+				cout << "Are you sure you want update this client? (y/n)\n";
+				cin >> c;
+				if (c == 'n')
+					break;
+				cout << "Enter Pin Code? ";
+				cin >> it->pin;
+				cout << "Enter Name? ";
+				cin >> it->name;
+				cout << "Enter Phone? ";
+				cin >> it->phone;
+				cout << "Enter Accout balance? ";
+				cin >> it->balance;
+				cout << "Client update successfully\n";
 				break;
-			cout << "Enter Pin Code? ";
-			cin >> it->pin;
-			cout << "Enter Name? ";
-			cin >> it->name;
-			cout << "Enter Phone? ";
-			cin >> it->phone;
-			cout << "Enter Accout balance? ";
-			cin >> it->balance;
-			cout << "Client update successfully\n";
-			break;
+			}
 		}
 	}
 	cout << "Press any key to go back to Main Menue? ...\n";
-	cin >> input;
+	cin >> c;
 }
 
-void find_client(vector<t_client>& data)
+void find_client(vector<t_client>& data, t_user &input)
 {
 	int i = 0;
-	cout << "---------------------------------\n";
-	cout << setw(40) << "Find Client Screen\n";
-	cout << "---------------------------------\n";
-	cout << "Please enter Account number?\n";
-	string input;
-	cin >> input;
-	for (auto it = data.begin(); it != data.end(); ++it)
+	string c;
+	system ("clear");
+	if ((input.per & 16) != 16)
+		access_denied();
+	else
 	{
-		if (input == it->id)
+		cout << "---------------------------------\n";
+		cout << setw(40) << "Find Client Screen\n";
+		cout << "---------------------------------\n";
+		cout << "Please enter Account number?\n";
+		cin >> c;
+		for (auto it = data.begin(); it != data.end(); ++it)
 		{
-			info_client(*it);
-			return ;
+			if (c == it->id)
+			{
+				info_client(*it);
+				return ;
+			}
 		}
+		cout << "Clinet not found ...\n";
 	}
-	cout << "Clinet not found ...\n";
 	cout << "Press any key to go back to Main Menue? ...\n";
-	cin >> input;
+	cin >> c;
 }
 
 vector<string> split(string s, string del)
@@ -256,7 +295,7 @@ void save_update(vector<t_client>& data)
 	}
 	fd.close();
 }
-void	deposit(vector<t_client> &data)
+void	deposit(vector<t_client> &data, t_user user)
 {
 	string	input;
 	int		nb;
@@ -279,7 +318,7 @@ void	deposit(vector<t_client> &data)
 			if (conf == "y")
 			{
 				it->balance	+= nb;
-				update_info(data);
+				update_info(data, user);
 			}
 			return ;
 		}
@@ -307,7 +346,7 @@ void	total_balances(vector<t_client> &data)
 	string in;
 	cin >> in;
 }
-void withdraw(vector<t_client> &data)
+void withdraw(vector<t_client> &data, t_user &user)
 {
 	string	input;
 	int		nb;
@@ -336,7 +375,7 @@ void withdraw(vector<t_client> &data)
 			if (conf == "y")
 			{
 				it->balance	-= nb;
-				update_info(data);
+				update_info(data, user);
 			}
 			return ;
 		}
@@ -346,35 +385,46 @@ void withdraw(vector<t_client> &data)
 	cin >> input;
 }
 
-void transaction(vector<t_client>& data)
+void transaction(vector<t_client>& data, t_user input)
 {
     int nb;
+	string c;
 
-    do {
-        system("clear");
-        cout << "====================================\n";
-        cout << "    Transactions Menue Screen\n";
-        cout << "====================================\n";
-        cout << "[1] Deposit.\n";
-        cout << "[2] Withdraw.\n";
-        cout << "[3] Total Balances.\n";
-        cout << "[4] Main Menue.\n";
-        cout << "====================================\n";
-        cout << "Choose what do you want to do? [1 to 4]?\n";
-		cin >> nb;
-        // Check if cin failed
-        if (cin.fail()) {
-            cin.clear(); // clear the error state
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the bad input
-            continue; // skip the rest of the loop
-        }
-        if (nb == 1)
-            deposit(data);
-		else if (nb == 2)
-			withdraw(data);
-		else if (nb == 3)
-			total_balances(data);
-    } while (nb != 4);
+	if ((input.per & 32) != 32)
+	{
+		system("clear");
+		access_denied();
+		cout << "Press any key to go back to Main Menue ...\n";
+		cin >> c;
+	}
+	else
+	{
+		do {
+			system("clear");
+			cout << "====================================\n";
+			cout << "    Transactions Menue Screen\n";
+			cout << "====================================\n";
+			cout << "[1] Deposit.\n";
+			cout << "[2] Withdraw.\n";
+			cout << "[3] Total Balances.\n";
+			cout << "[4] Main Menue.\n";
+			cout << "====================================\n";
+			cout << "Choose what do you want to do? [1 to 4]?\n";
+			cin >> nb;
+			// Check if cin failed
+			if (cin.fail()) {
+				cin.clear(); // clear the error state
+				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the bad input
+				continue; // skip the rest of the loop
+			}
+			if (nb == 1)
+				deposit(data, input);
+			else if (nb == 2)
+				withdraw(data, input);
+			else if (nb == 3)
+				total_balances(data);
+		} while (nb != 4);
+	}
 }
 
 void	read_file(vector<t_user> &user)
@@ -408,7 +458,7 @@ bool	find_user(t_user &input, vector<t_user> &data)
 	{
 		if (it->user == input.user && it->pass == input.pass)
 		{
-			cout << "hi me...\n";
+			input.per = it->per;
 			return (true);
 		}
 	}
@@ -561,23 +611,28 @@ void delete_user(vector<t_user> &data)
 	cin >> c;
 	int v = 0;
 	string input;
-	for (auto it = data.begin(); it != data.end(); ++it)
+	if (c != "Admin")
+		cout << "You cannot Delete this User.\n";
+	else
 	{
-		if (it->user == c)
+		for (auto it = data.begin(); it != data.end(); ++it)
 		{
-			info_user(*it);
-			cout << "\nAre you sure you want delete this user? (y/n)\n";
-			v = 1;
-			cin >> input;
-			if (input != "y")
-				cout << "User Deleted Successfuly .\n";
-			else
-				data.erase(it);
-			break ;
+			if (it->user == c)
+			{
+				info_user(*it);
+				cout << "\nAre you sure you want delete this user? (y/n)\n";
+				v = 1;
+				cin >> input;
+				if (input != "y")
+					cout << "User Deleted Successfuly .\n";
+				else
+					data.erase(it);
+				break ;
+			}
 		}
+		if (v == 0)
+			cout << "User (" << c << ") is Not Found!\n";
 	}
-	if (v == 0)
-		cout << "User (" << c << ") is Not Found!\n";
 	string n;
 	cout << "Press any key to go back to Manage Users Menue Screen ...\n";
 	cin >> n;
@@ -627,37 +682,47 @@ void update_users(vector<t_user> &data)
 	cin >> input;
 }
 
-void	manage_users(vector<t_user> &data)
+void	manage_users(vector<t_user> &data, t_user &input)
 {
 	int nb;
-	do{
-		system("clear");
-		cout << "==================================\n";
-		cout << "	Manage Users Menue Screen\n";
-		cout << "==================================\n";
-		cout << "[1] List Users.\n";
-		cout << "[2] Add New User.\n";
-		cout << "[3] Delete User.\n";
-		cout << "[4] Update User.\n";
-		cout << "[5] Find User.\n";
-		cout << "[6] Main Menue.\n";
-		cout << "==================================\n";
-		cout << "Choose what do you want to do? [1 to 6]?";
-		while(!(cin >> nb))
-		{
-    		cin.clear();
-    		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-   			cout << "Invalid input. Please enter a number: ";
-		}
-		if (nb == 1)
-			show_users(data);
-		else if (nb == 2)
-			add_user(data);
-		else if (nb == 3)
-			delete_user(data);
-		else if (nb == 4)
-			update_users(data);
-	} while (nb != 6);
+	string c;
+	if ((input.per & 64) != 64)
+	{
+		system("clear");		
+		access_denied();
+		cout << "Press any key to go back to Main Menue? ...\n";
+		cin >> c;
+	}
+	else
+	{
+		do{
+			system("clear");
+			cout << "==================================\n";
+			cout << "	Manage Users Menue Screen\n";
+			cout << "==================================\n";
+			cout << "[1] List Users.\n";
+			cout << "[2] Add New User.\n";
+			cout << "[3] Delete User.\n";
+			cout << "[4] Update User.\n";
+			cout << "[5] Main Menue.\n";
+			cout << "==================================\n";
+			cout << "Choose what do you want to do? [1 to 6]?";
+			while(!(cin >> nb))
+			{
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Invalid input. Please enter a number: ";
+			}
+			if (nb == 1)
+				show_users(data);
+			else if (nb == 2)
+				add_user(data);
+			else if (nb == 3)
+				delete_user(data);
+			else if (nb == 4)
+				update_users(data);
+		} while (nb != 5);
+	}
 }
 
 
@@ -675,23 +740,23 @@ int main()
     {
         nb = start();
         if (nb == 1)
-            show_clients(data);
+            show_clients(data, input);
         else if (nb == 2)
-            add_client(data);
+            add_client(data, input);
 		else if (nb == 3)
-			delete_client(data);
+			delete_client(data, input);
 		else if (nb == 4)
-			update_info(data);
+			update_info(data, input);
 		else if (nb == 5)
-			find_client(data);
+			find_client(data, input);
 		else if (nb == 6)
-			transaction(data);
+			transaction(data, input);
 		else if (nb == 7)
-			manage_users(users);
+			manage_users(users, input);
 		else if (nb == 8)
 		{
 			save_update(data);
-			login_part(users);
+			input = login_part(users);
 		}
 	} while (nb != 9);
 	system("clear");
