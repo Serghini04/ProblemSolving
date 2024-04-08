@@ -127,6 +127,7 @@ void	delete_client(vector<t_client>& data)
 	cin >> n;
 }
 
+
 void update_info(vector<t_client>& data)
 {
 	string input;

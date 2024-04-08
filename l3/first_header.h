@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iomanip>
+
 // auto is type variable ..
 //g++ -std=c++11 testheder.cpp
 //int randNum = rand() % (To - From + 1) + From;
