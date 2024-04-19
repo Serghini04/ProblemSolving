@@ -39,7 +39,7 @@ class clsCalculator
 		string	_token;
 	public:
         //A Constructor is a special type of member function that is called automatically when an object is created.
-        clsCalculator(long sum, long save_changes, string token)
+		clsCalculator(long sum, long save_changes, string token)
         {
             _sum = sum;
             _save_changes = save_changes;
@@ -84,28 +84,23 @@ class clsCalculator
 			_save_changes = nb;
 			_sum *= nb;
 		}
-		long	GetRes()
-		{
-			return (_sum);
-		}
 		//Static (Functions / member) can be called at class level without a need to have an object.
 		// exmp ==>  clsCalculator::PrintRes
-		static void	PrintRes()
+		// Modify PrintRes to take an instance of clsCalculator
+		static void	PrintRes(clsCalculator &calc)
 		{
-			cout << "Result After ";
-			cout << _token << " ";
-			cout << _save_changes << " is : " << GetRes() << endl;
+		    cout << "Result After ";
+		    cout << calc._token << " ";
+		    cout << calc._save_changes << " is : " <<  << endl;
 		}
 };
-
 
 int main()
 {
     //creating first object:
-    clsPerson a;
-    string s;
-    a.FirstName = "Mehdi";
-    a.LastName = "Serghini";
-    cout << a.FullName(); 
+	clsCalculator t(0, 0, "Clean");
+	t.Sub(66);
+	t.Add(566);
+	t.PrintRes(t);
     return (0);
 }
