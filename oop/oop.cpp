@@ -54,7 +54,7 @@ class clsCalculator
             // This approach can be useful for deallocating all dynamically allocated memory
             cout << "\n Hi, I'm Destructor ...\n";
         }
-        void	Clean()
+		void	Clean()
 		{
 			_sum = 0;
 			_save_changes = 0;
@@ -91,7 +91,7 @@ class clsCalculator
 		{
 		    cout << "Result After ";
 		    cout << calc._token << " ";
-		    cout << calc._save_changes << " is : " <<  << endl;
+		    cout << calc._save_changes << " is : " << calc._sum << endl;
 		}
 };
 

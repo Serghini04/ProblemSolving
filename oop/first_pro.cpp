@@ -49,6 +49,8 @@ class	clsPerson
 			_email = email;
 			_phone = phone;
 		}
+		// Virtual function : is used in the base class in order to ensure that the function is overridden.
+		// This especially applies to cases where a pointer of base class points to an object of a derived class.
 		void	PrintInfo()
 		{
 			cout << "Info :\n";
@@ -76,11 +78,10 @@ class	clsPerson
 // Sub Class/Derived Class	==Inherits==>	Sup Class/Base Class
 class clsEmployee : public clsPerson // public (Visibility Mode).
 //					 Visibility Mode
-//	  members : Private     |  Prptected   |  Public
-// public =>  inaccessible  |  protected   |  private
+//	 	 Mode : Private     |  Prptected   |  Public
+// public =>  inaccessible  |  protected   |  public
 // private => inaccessible  |  private     |  private
 // protected => inaccessible|  protected   |  protected
-
 {
 	private :
 		string	_Title;
@@ -110,15 +111,28 @@ class clsEmployee : public clsPerson // public (Visibility Mode).
 		}
 };
 //.
-// <>
-//<<>>
-// <>
+//	Inheritance types :
+//==> Single Inheritance.
+//==> Multi Level Inheritance.
+//==> Hierarchal Inheritance.
+//..
+
+// Class Casting :
+// Up Casting is converting derived object to it's base object.
+// Down Casting is Converting Base object to Derived object.
+
 int	main()
 {
 	clsEmployee data(66, "Mehdi", "my@gmail.com", "065326434", "CEO", "Programing", 5000);
+	clsPerson * ptr;
+	ptr = &data;
+
 	data.SetName("Mehdi");
 	data.SetEmail("my@gmail.com");
 	data.SetPhone("0518418415");
+	// Early-Static Binding.
 	data.PrintInfo();
+	// Late-Dynamic Binding.
+	ptr->PrintInfo();
 	return (0);
 }
