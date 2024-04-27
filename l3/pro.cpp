@@ -51,7 +51,6 @@ void access_denied()
 
 void show_clients(const vector<t_client>& data, t_user input)
 {
-    string c;
     system("clear");
 	if ((input.per & 1) != 1)
 		access_denied();
@@ -67,7 +66,7 @@ void show_clients(const vector<t_client>& data, t_user input)
 		}
 	}
     cout << "Press any Key to go back to Main Menu ....\n";
-    cin >> c;
+	cin.ignore();
 }
 
 void	add_client(vector<t_client>& data, t_user &input)
@@ -495,7 +494,7 @@ void	show_users(vector<t_user> &data)
 	cout << "============================================\n";
 	for (auto it = data.begin(); it != data.end(); it++)
 	{
-		cout << "|  " << it->user << "      |	" << it->pass << "	    |    " << it->per << endl; 
+		cout << "|  " << it->user << "      |	" << it->pass << "	    |    " << it->per << endl;
 	}
 	cout << "============================================\n";
 	string nb;
@@ -521,7 +520,7 @@ void add_per(t_user &data, int per)
 	string c;
 	cin >> c;
 	if (c == "y")
-		data.per += per;	
+		data.per += per;
 }
 
 void	update_file_users(vector<t_user> &data)
@@ -688,7 +687,7 @@ void	manage_users(vector<t_user> &data, t_user &input)
 	string c;
 	if ((input.per & 64) != 64)
 	{
-		system("clear");		
+		system("clear");
 		access_denied();
 		cout << "Press any key to go back to Main Menue? ...\n";
 		cin >> c;

@@ -72,7 +72,16 @@ class	clsPerson
 			cout << "The following SMS sent successfully to phone  : " << _name;
 			cout << "\n" << sms << endl;
 		}
+		// A friend class can access both private and protected members of the class in which it has been declared as friend.
+		friend class clsEmployee;
+		// or Friend function.
+		friend int MyId(clsPerson a);
 };
+
+int	MyId(clsPerson a)
+{
+	return (a._id);
+}
 
 //							Inheritance
 // Sub Class/Derived Class	==Inherits==>	Sup Class/Base Class
