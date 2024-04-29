@@ -24,11 +24,16 @@ private:
 	        res.push_back(s);
 	    return (res);
 	}
-	static clsBankClient __convertLineClientObject(string line)
+	static clsBankClient _ConvertLineObject(string line)
 	{
 		vector<string> data;
 		data = _split(line, ">>>");
-		return clsBankClient(enMode::UpdateMode, data[1], data[2], data[0], data[4], data[3], data[5]);
+		return (clsBankClient(enMode::UpdateMode, data[1], data[2], data[0],\
+											 data[4], data[3], stoi(data[5])));
+	}
+	static clsBankClient _EmptyClientObject()
+	{
+		return (clsBankClient(enMode::EmptyMode, "", "", "", "", "", 0));
 	}
 public:
 	clsBankClient(int Mode, string Name, string Email, string id, string Phone, string pin, int balance)
@@ -62,7 +67,15 @@ public:
 			while (getline(fd, line))
 			{
 				clsBankClient Client = _ConvertLineObject(line);
+				if (Client._id == id)
+				{
+					fd.close();
+					return (Client);
+				}
 			}
+			fd.close();
 		}
+		return (_EmptyClientObject());
 	}
-}
+
+};
