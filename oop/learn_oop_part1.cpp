@@ -3,7 +3,7 @@
 //class came from classification
 
 // create first class
-class clsPerson
+class clsPerso
 {
     // data members : any variable declared inside the class.
     // member methode : any function ... .
