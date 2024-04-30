@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include "clsBankClient.h"
-#include "clsPerson.h"
 using namespace std;
 
 #endif

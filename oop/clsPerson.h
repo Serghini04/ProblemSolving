@@ -1,4 +1,5 @@
 #include "oop.h"
+using namespace std;
 
 class	clsPerson
 {
@@ -37,4 +38,4 @@ public:
 	{
 		return _Phone;
 	}
-}
+};
