@@ -10,6 +10,7 @@ private:
 	string	_pin;
 	int		_balance;
 	int		_Mode;
+public:
 	string	Id()
 	{
 		return (_id);
@@ -64,7 +65,6 @@ private:
 	{
 		return (clsBankClient(enMode::EmptyMode, "", "", "", "", "", 0));
 	}
-public:
 	clsBankClient(int Mode, string Name, string Email, string id, string Phone, string pin, int balance)
 	 : clsPerson(Name, Email, Phone)
 	{
@@ -127,40 +127,8 @@ public:
 		}
 		return (_EmptyClientObject());
 	}
-	static bool IsClientExit(clsBankClient Client)
-	{;
-		return (Client.Mode() == 1);
+	static bool IsClientExit(string id)
+	{
+		return (clsBankClient::Find(id).Mode() == enMode::UpdateMode);
 	}
-	// void update_info()
-	// {
-	// 	string c;
-	// 	system("clear");
-	// 	cout << "----------------------------------\n";
-	// 	cout << setw(5) << "Update Client Info Screen\n";
-	// 	cout << "----------------------------------\n";
-	// 	cout << "Please enter Account Number?\n";
-	// 	cin >> c;
-	// 	clsBankClient Client = clsBankClient::Find(c);
-	// 	if (clsBankClient::IsClientExit(Client))
-	// 	{
-	// 		;
-	// 		char c;
-	// 		cout << "Are you sure you want update this client? (y/n)\n";
-	// 		cin >> c;
-	// 		if (c == 'n')
-	// 			break;
-	// 		cout << "Enter Pin Code? ";
-	// 		cin >> it->pin;
-	// 		cout << "Enter Name? ";
-	// 		cin >> it->name;
-	// 		cout << "Enter Phone? ";
-	// 		cin >> it->phone;
-	// 		cout << "Enter Accout balance? ";
-	// 		cin >> it->balance;
-	// 		cout << "Client update successfully\n";
-	// 		break;
-	// 	}
-	// 	cout << "Press any key to go back to Main Menue? ...\n";
-	// 	cin >> c;
-	// }
 };
