@@ -10,6 +10,81 @@ private:
 	string	_pin;
 	int		_balance;
 	int		_Mode;
+	static clsBankClient _ConvertLineObject(string line)
+	{
+		vector<string> data;
+		data = _split(line, ">>>");
+		return (clsBankClient(enMode::UpdateMode, data[1], data[2], data[0], data[4], data[3], stoi(data[5])));
+	}
+	static vector<string> _split(string s, string del)
+	{
+	    vector<string> res;
+	    string word;
+	    int pos;
+	    while ((pos = s.find(del)) != std::string::npos)
+	    {
+	        word = s.substr(0, pos);
+	        if (word != "")
+	            res.push_back(word);
+	        s.erase(0, pos + del.length());
+	    }
+	    if (s != "")
+	        res.push_back(s);
+	    return (res);
+	}
+	static string	_ConvertClientObjectToLine(clsBankClient data)
+	{
+		string line;
+		line = data.Id()+ ">>>" + data.Name() + ">>>" + data.Email() + ">>>" + data.Pin() + ">>>" + data.Phone()+  ">>>" + to_string(data.Balance()) +"\n";
+		return (line);
+	}
+	static vector<clsBankClient> _LoadClientFromFile()
+	{
+		vector	<clsBankClient> vClients;
+		fstream fd;
+		fd.open("clients", ios::in);
+		if (fd.is_open())
+		{
+			string  line;
+			while (getline(fd, line))
+			{
+				clsBankClient Client = _ConvertLineObject(line);
+				vClients.push_back(Client);
+			}
+			fd.close();
+		}
+		return (vClients);
+	}
+	static void _SaveClientDataToFile(vector <clsBankClient> _Clients)
+	{
+		fstream fd;
+		fd.open("cliens", ios::out);
+		string line;
+		if (fd.is_open())
+		{
+			for (clsBankClient &C : _Clients)
+			{
+				line =  _ConvertClientObjectToLine(C);
+				fd << line;
+			}
+			fd.close();
+		}
+	}
+	void	_Update()
+	{
+		vector<clsBankClient> _vClient;
+		_vClient = _LoadClientFromFile();
+		for (clsBankClient &C : _vClient)
+		{
+			if (C.Id() == Id())
+			{
+				C = *this;
+				C.Print();
+				break;
+			}
+		}
+		_SaveClientDataToFile(_vClient);
+	}
 public:
 	string	Id()
 	{
@@ -35,31 +110,9 @@ public:
 	{
 		_balance = balance;
 	}
-	// void	SetMode(int mode)
-	// {
-	// 	_Mode =  mode;
-	// }
-	static vector<string> _split(string s, string del)
+	void	SetMode(int mode)
 	{
-	    vector<string> res;
-	    string word;
-	    int pos;
-	    while ((pos = s.find(del)) != std::string::npos)
-	    {
-	        word = s.substr(0, pos);
-	        if (word != "")
-	            res.push_back(word);
-	        s.erase(0, pos + del.length());
-	    }
-	    if (s != "")
-	        res.push_back(s);
-	    return (res);
-	}
-	static clsBankClient _ConvertLineObject(string line)
-	{
-		vector<string> data;
-		data = _split(line, ">>>");
-		return (clsBankClient(enMode::UpdateMode, data[1], data[2], data[0], data[4], data[3], stoi(data[5])));
+		_Mode =  mode;
 	}
 	static clsBankClient _EmptyClientObject()
 	{
@@ -130,5 +183,14 @@ public:
 	static bool IsClientExit(string id)
 	{
 		return (clsBankClient::Find(id).Mode() == enMode::UpdateMode);
+	}
+	bool	Save()
+	{
+		if (Mode() == enMode::UpdateMode)
+		{
+			_Update();
+			return (true);
+		}
+		return (false);
 	}
 };

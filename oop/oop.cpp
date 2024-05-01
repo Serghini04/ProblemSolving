@@ -23,7 +23,7 @@ void update_info()
 	cin >> input;
 	Client.SetPin(input);
 	cout << "Enter Name? \n";
-	getline(cin, input);
+	cin >> input;
 	Client.SetName(input);
 	cout << "Enter Email? \n";
 	cin >> input;
@@ -35,6 +35,7 @@ void update_info()
 	int b;
 	cin >> b;
 	Client.SetBalance(b);
+	Client.Save();
 	cout << "Client update successfully\n";
 	cout << "Press any key to go back to Main Menue? ...\n";
 	cin >> c;
@@ -42,7 +43,5 @@ void update_info()
 
 int main()
 {
-	clsBankClient Client1 = clsBankClient::Find("A000");
 	update_info();
-	Client1.Print();
 }
