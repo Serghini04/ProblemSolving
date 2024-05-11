@@ -4,7 +4,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "clsPerson.h"
 #include "clsBankClient.h"
+#include "clsInputValidate.h"
+#include "clsTransactionsSreen.h"
+#include "clsMainMenue.h"
+
 using namespace std;
+
 
 #endif

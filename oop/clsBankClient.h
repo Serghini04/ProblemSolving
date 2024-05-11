@@ -1,15 +1,15 @@
 #include "oop.h"
-#include "clsPerson.h"
 using namespace std;
 
 class	clsBankClient : public clsPerson
 {
 private:
-	enum	enMode{EmptyMode, UpdateMode};
+	enum	enMode{EmptyMode, UpdateMode, AddNewMode};
 	string	_id;
 	string	_pin;
 	int		_balance;
 	int		_Mode;
+	bool	_MarkForDelete = false;
 	static clsBankClient _ConvertLineObject(string line)
 	{
 		vector<string> data;
@@ -58,14 +58,17 @@ private:
 	static void _SaveClientDataToFile(vector <clsBankClient> _Clients)
 	{
 		fstream fd;
-		fd.open("cliens", ios::out);
+		fd.open("clients", ios::out);
 		string line;
 		if (fd.is_open())
 		{
 			for (clsBankClient &C : _Clients)
 			{
-				line =  _ConvertClientObjectToLine(C);
-				fd << line;
+				if (C._MarkForDelete == false)
+				{
+					line =  _ConvertClientObjectToLine(C);
+					fd << line;
+				}
 			}
 			fd.close();
 		}
@@ -85,7 +88,21 @@ private:
 		}
 		_SaveClientDataToFile(_vClient);
 	}
+	static clsBankClient _EmptyClientObject()
+	{
+		return (clsBankClient(enMode::EmptyMode, "", "", "", "", "", 0));
+	}
+	void	_AddNew()
+	{
+		vector<clsBankClient> Clients = _LoadClientFromFile();
+		Clients.push_back(*this);
+		_SaveClientDataToFile(Clients);
+	}
 public:
+	static	vector<clsBankClient> GetClientsList()
+	{
+		return (_LoadClientFromFile());
+	}
 	string	Id()
 	{
 		return (_id);
@@ -114,10 +131,6 @@ public:
 	{
 		_Mode =  mode;
 	}
-	static clsBankClient _EmptyClientObject()
-	{
-		return (clsBankClient(enMode::EmptyMode, "", "", "", "", "", 0));
-	}
 	clsBankClient(int Mode, string Name, string Email, string id, string Phone, string pin, int balance)
 	 : clsPerson(Name, Email, Phone)
 	{
@@ -125,6 +138,10 @@ public:
 		_id = id;
 		_pin = pin;
 		_balance = balance;
+	}
+	static	clsBankClient GetAddNewClientObject(string Id)
+	{
+		return (clsBankClient(enMode::AddNewMode, "", "", Id, "", "", 0));
 	}
 	void	Print()
 	{
@@ -184,13 +201,71 @@ public:
 	{
 		return (clsBankClient::Find(id).Mode() == enMode::UpdateMode);
 	}
-	bool	Save()
-	{
-		if (Mode() == enMode::UpdateMode)
-		{
+	    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildAccountNumberExists = 2 };
+    enSaveResults Save()
+    {
+
+        switch (_Mode)
+        {
+        case enMode::EmptyMode:
+        {
+            return enSaveResults::svFaildEmptyObject;
+        }
+
+        case enMode::UpdateMode:
+        {
 			_Update();
-			return (true);
+            return enSaveResults::svSucceeded;
+            break;
+        }
+        case enMode::AddNewMode:
+        {
+            //This will add new record to file or database
+            if (clsBankClient::IsClientExit(_id))
+                return enSaveResults::svFaildAccountNumberExists;
+            else
+            {
+                _AddNew();
+                //We need to set the mode to update after add new
+                _Mode = enMode::UpdateMode;
+                return enSaveResults::svSucceeded;
+            }
+
+            break;
+        }
+        }
+    }
+	int	Delete()
+	{
+		int b = 0;
+		vector<clsBankClient> Clients = _LoadClientFromFile();
+		for (clsBankClient &C : Clients)
+		{
+			if (C.Id() == Id())
+			{
+				C._MarkForDelete = true;
+				b = 1;
+				break;
+			}
 		}
-		return (false);
+		_SaveClientDataToFile(Clients);
+		return (b);
 	}
+    void Deposit(double Amount)
+    {
+        _balance += Amount;
+        Save();
+    }
+
+    bool Withdraw(double Amount)
+    {
+		if (Amount > _balance)
+			return false;
+		else
+		{
+        	_balance -= Amount;
+       		 Save();
+		}
+		return true;
+    }
 };
