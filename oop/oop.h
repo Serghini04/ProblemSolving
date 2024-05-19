@@ -12,5 +12,4 @@
 
 using namespace std;
 
-
 #endif

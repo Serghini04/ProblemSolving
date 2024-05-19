@@ -1,4 +1,5 @@
 #include "oop.h"
+#include "clsMangeUser.h"
 
 using namespace std;
 class clsScreen
@@ -56,9 +57,7 @@ public:
                 _PrintClient(Client1);
             }
             else
-            {
                 cout << "\nError Client Was not Deleted\n";
-            }
         }
     }
 
@@ -135,7 +134,6 @@ public:
         {
             cout << "\nError account was not saved because account number is used!\n";
             break;
-
         }
         }
     }
@@ -213,7 +211,6 @@ public:
             {
                 cout << "\nError account was not saved because it's Empty";
                 break;
-
             }
             }
         }
@@ -259,7 +256,6 @@ public:
         else
             for (clsBankClient Client : vClients)
             {
-
                 PrintClientRecordLine(Client);
                 cout << endl;
             }
@@ -362,8 +358,7 @@ class clsMainScreen:protected clsScreen
         }
         static void _ShowManageUsersMenue()
         {
-            cout << "\nUsers Menue Will be here...\n";
-
+            clsManageUsersScreen::ShowManageUsersMenue();
         }
         static void _ShowEndScreen()
         {

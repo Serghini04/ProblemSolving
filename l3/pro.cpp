@@ -65,8 +65,9 @@ void show_clients(const vector<t_client>& data, t_user input)
 			cout << "|" << setw(15) << info.id << "|" << setw(10) << info.pin << "|" << setw(22) << info.name << "|" << setw(14) << info.phone << "|" << setw(8) << info.balance << "\n";
 		}
 	}
+	string input;
     cout << "Press any Key to go back to Main Menu ....\n";
-	cin.ignore();
+	cin >> input;
 }
 
 void	add_client(vector<t_client>& data, t_user &input)
