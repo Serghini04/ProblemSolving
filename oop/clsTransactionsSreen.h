@@ -1,4 +1,5 @@
 #include "oop.h"
+#include "global.h"
 using namespace std;
 
 class clsScreens
@@ -10,7 +11,9 @@ protected :
         cout << "\n\n\t\t\t\t\t  " << Title;
         if (SubTitle != "")
             cout << "\n\t\t\t\t\t  " << SubTitle;
-        cout << "\n\t\t\t\t\t______________________________________\n\n";
+        cout << "\n\t\t\t\t\t______________________________________";
+        cout << "\n\t\t\t\t\tUser : " << CurrentUser.UserName();
+        cout << "\n\t\t\t\t\tDate : " << clsDate::DateToString(clsDate::GetSystemDate()) << "\n\n";
     }
 };
 

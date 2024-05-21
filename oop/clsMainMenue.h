@@ -1,6 +1,7 @@
 #include "oop.h"
 #include "clsMangeUser.h"
 
+
 using namespace std;
 class clsScreen
 {
@@ -11,9 +12,27 @@ protected :
         cout << "\n\n\t\t\t\t\t  " << Title;
         if (SubTitle != "")
             cout << "\n\t\t\t\t\t  " << SubTitle;
-        cout << "\n\t\t\t\t\t______________________________________\n\n";
+        cout << "\n\t\t\t\t\t______________________________________";
+        cout << "\n\t\t\t\t\tUser : " << CurrentUser.UserName();
+        cout << "\n\t\t\t\t\tDate : " << clsDate::DateToString(clsDate::GetSystemDate()) << "\n\n";
     }
 };
+    static bool CheckAccessRights(clsUser::enPermissions Permission)
+    {
+
+            if (!CurrentUser.CheckAccessPermission(Permission))
+            {
+                cout << "\t\t\t\t\t______________________________________";
+                cout << "\n\n\t\t\t\t\t  Access Denied! Contact your Admin.";
+                cout << "\n\t\t\t\t\t______________________________________\n\n";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+    }
 
 class clsDeleteClientScreen :protected clsScreen
 {
@@ -236,6 +255,8 @@ private:
 public:
    static void ShowClientsList()
     {
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients))
+            return ;
         vector <clsBankClient> vClients = clsBankClient::GetClientsList();
         string Title = "\t  Client List Screen";
         string SubTitle ="\t    (" + to_string(vClients.size()) + ") Client(s).";
@@ -337,33 +358,38 @@ class clsMainScreen:protected clsScreen
 		}
 		static void _ShowAddNewClientsScreen()
 		{
-		     clsAddNewClientScreen::ShowAddNewClientScreen();
+            if (CheckAccessRights(clsUser::enPermissions::pAddNewClient))
+		        clsAddNewClientScreen::ShowAddNewClientScreen();
 		}
        static void _ShowDeleteClientScreen()
        {
-           clsDeleteClientScreen::ShowDeleteClientScreen();
+            if (CheckAccessRights(clsUser::enPermissions::pAddNewClient))
+                    clsDeleteClientScreen::ShowDeleteClientScreen();
        }
 
        static void _ShowUpdateClientScreen()
 		{
-			clsUpdateClientScreen::ShowUpdateClientScreen();
+            if (CheckAccessRights(clsUser::enPermissions::pUpdateClients))
+			    clsUpdateClientScreen::ShowUpdateClientScreen();
 		}
 		static void _ShowFindClientScreen()
 		{
-			clsFindClientScreen::ShowFindClientScreen();
+            if (CheckAccessRights(clsUser::enPermissions::pFindClient))
+			    clsFindClientScreen::ShowFindClientScreen();
 		}
         static void _ShowTransactionsMenue()
         {
-            clsTransactionsScreen::ShowTransactionsMenue();
+            if (CheckAccessRights(clsUser::enPermissions::pTranactions))
+                clsTransactionsScreen::ShowTransactionsMenue();
         }
         static void _ShowManageUsersMenue()
         {
-            clsManageUsersScreen::ShowManageUsersMenue();
+            if (CheckAccessRights(clsUser::enPermissions::pManageUsers))
+                clsManageUsersScreen::ShowManageUsersMenue();
         }
-        static void _ShowEndScreen()
+        static void _Logout()
         {
-            cout << "\nEnd Screen Will be here...\n";
-
+            CurrentUser = clsUser::Find("", "");
         }
         static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
         {
@@ -372,6 +398,7 @@ class clsMainScreen:protected clsScreen
             case enMainMenueOptions::eListClients:
             {
                 system("clear");
+
                 _ShowAllClientsScreen();
                 _GoBackToMainMenue();
                 break;
@@ -414,9 +441,7 @@ class clsMainScreen:protected clsScreen
 
             case enMainMenueOptions::eExit:
                 system("clear");
-                _ShowEndScreen();
-                //Login();
-
+                _Logout();
                 break;
             }
 

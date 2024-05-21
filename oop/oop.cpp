@@ -2,5 +2,7 @@
 
 int main()
 {
-	clsMainScreen::ShowMainMenue();
+	while (1)
+		clsLoginScreen::ShowLoginScreen();
+	return (0);
 }
