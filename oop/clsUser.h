@@ -1,5 +1,6 @@
 #pragma once
 #include "oop.h"
+#include <unistd.h>
 using namespace std;
 
 class clsUser : public clsPerson
@@ -280,14 +281,16 @@ public:
         return _LoadUsersDataFromFile();
     }
     enum enPermissions{eALL = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
-     pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64};
+     pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64, pLoginRegister = 256};
     bool CheckAccessPermission(enPermissions Permission)
     {
         if (this->Permissions() == enPermissions::eALL)
             return true;
 
-        if (Permission & this->Permissions() == Permission)
+        if ((Permission & this->Permissions()) == Permission)
+        {
             return true;
+        }
         else
             return false;
 

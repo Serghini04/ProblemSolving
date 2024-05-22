@@ -387,7 +387,7 @@ class clsMainScreen:protected clsScreen
         }
         static void _ShowLoginRegister()
         {
-            // if (CheckAccessRights(clsUser::enPermissions::pManageUsers))
+            if (CheckAccessRights(clsUser::enPermissions::pLoginRegister))
                 clsLoginRegister::ShowLoginRegister();
         }
         static void _Logout()
@@ -408,7 +408,7 @@ class clsMainScreen:protected clsScreen
             }
             case enMainMenueOptions::eAddNewClient:
                 system("clear");
-               _ShowAddNewClientsScreen();
+                _ShowAddNewClientsScreen();
                 _GoBackToMainMenue();
                 break;
 
