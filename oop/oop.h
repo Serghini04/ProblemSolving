@@ -1,3 +1,4 @@
+#pragma once
 #ifndef OOP_H
 #define OOP_H
 using namespace std;
