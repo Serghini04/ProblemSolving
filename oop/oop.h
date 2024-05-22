@@ -13,6 +13,7 @@ using namespace std;
 #include "clsTransactionsSreen.h"
 #include "clsMainMenue.h"
 #include "global.h"
+#include "clsLoginRegister.h"
 
 class clsLoginScreen :protected clsScreens
 {
@@ -40,7 +41,7 @@ private :
             LoginFaild = CurrentUser.IsEmpty();
 
         } while (LoginFaild);
-
+        clsLoginRegister::AddUserToLoginRegister(CurrentUser);
         clsMainScreen::ShowMainMenue();
     }
 

@@ -1,6 +1,8 @@
 #include "oop.h"
 using namespace std;
-
+#include <ctime>
+#include <iostream>
+#include <iomanip>
 
 class clsDate
 {
@@ -57,7 +59,6 @@ public:
 		_Year = stoi(vDate[2]);
 
 	}
-
 	clsDate(short Day, short Month, short Year)
 	{
 
@@ -96,6 +97,14 @@ public:
 		return clsDate(Day, Month, Year);
 	}
 
+	static std::string getCurrentTime() {
+	    std::time_t now = std::time(nullptr);
+	    std::tm *ltm = std::localtime(&now);
+
+	    string	ss;
+	    ss = to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min) + ":" + to_string(ltm->tm_sec);
+	    return ss;
+	}
     static	bool IsValidDate(clsDate Date)
 	{
 
