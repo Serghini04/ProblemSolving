@@ -4,7 +4,6 @@ using namespace std;
 class	clsBankClient : public clsPerson
 {
 private:
-	enum	enMode{EmptyMode, UpdateMode, AddNewMode};
 	string	_id;
 	string	_pin;
 	int		_balance;
@@ -99,6 +98,7 @@ private:
 		_SaveClientDataToFile(Clients);
 	}
 public:
+	enum	enMode{EmptyMode, UpdateMode, AddNewMode};
 	static	vector<clsBankClient> GetClientsList()
 	{
 		return (_LoadClientFromFile());
