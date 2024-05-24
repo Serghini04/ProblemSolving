@@ -314,7 +314,7 @@ public:
       string sWord; // define a string variable
 
       // use find() function to get the position of the delimiters
-      while ((pos = S1.find(Delim)) != std::string::npos)
+      while (!S1.empty() && (pos = S1.find(Delim)) != std::string::npos)
       {
           sWord = S1.substr(0, pos); // store the word
          /* if (sWord != "")

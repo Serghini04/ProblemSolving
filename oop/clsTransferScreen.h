@@ -66,10 +66,11 @@ class	clsTransferScreen
 		cin >> input;
 		if (input == "y" || input == "Y")
 		{
-			dataFrom.SetBalance(dataFrom.Balance() - Amount);
-			dataFrom.Save();
-			dataTo.SetBalance(dataTo.Balance() + Amount);
-			dataTo.Save();
+			// dataFrom.SetBalance(dataFrom.Balance() - Amount);
+			// dataFrom.Save();
+			// dataTo.SetBalance(dataTo.Balance() + Amount);
+			// dataTo.Save();
+			dataFrom.Transfer(Amount, dataTo,CurrentUser.UserName());
 			cout << "Transfer done successfuly.\n";
 		}
 		else
