@@ -1,5 +1,6 @@
 #pragma once
 #include "oop.h"
+#include "clsUtil.h"
 #include <unistd.h>
 using namespace std;
 
@@ -35,7 +36,7 @@ private:
         vUserData = _split(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], stoi(vUserData[5]));
+            vUserData[3], clsUtil::DecryptText(vUserData[4], 36), stoi(vUserData[5]));
 
     }
 
@@ -47,7 +48,7 @@ private:
         UserRecord += User.Email() + Seperator;
         UserRecord += User.Phone() + Seperator;
         UserRecord += User.UserName() + Seperator;
-        UserRecord += User.Password() + Seperator;
+        UserRecord += clsUtil::EncryptText(User.Password(), 36) + Seperator;
         UserRecord += to_string(User.Permissions());
 
         return UserRecord;

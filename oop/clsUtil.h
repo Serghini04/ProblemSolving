@@ -212,7 +212,6 @@ public:
             Text[i] = char((int)Text[i] + EncryptionKey);
 
         }
-
         return Text;
 
     }

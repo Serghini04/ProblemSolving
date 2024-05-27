@@ -1,0 +1,29 @@
+	>> introduction to virtualization:
+> virtualization enbale us to run more than one virtual system and multiple
+> operating system and applications on a single server.
+> Each virtul machine is isolatod.
+	>> Client-Server (Web) applications:
+> any application accessible over the public internet.
+	>> Data Center Servers Are Placed In Racks:
+> A server is basically a powerful computer with good-sized memory, computer
+> Disk drive to store operating system and data, and network interface.
+	>> On-Premises Data Centers Vs Cloud:
+> On-Premises Data : Customer is 100% responsible for it: Design, Cost, Build, Operation, Optimiziation, Security...
+> and the resources are located on-site at the organization's physical location.
+> In Cloud computing, everything the customer needs is pre-built and ready for use.
+> the resources are located off-site.
+	>> Cloud Types :
+-> Public : Resources are publicly shared + Best suited for less confidential data.
+-> Private: Resources are for Private use + Best suited for confidential data, client private system.
+-> Hybrid : is a mix of public and on-premises private cloud that is orchestrated run a single task.
+-> Multi Cloud : is the use of multiple cloud computing and storage services in a single heterogeneous architecture.
+	>> Cloud Service: Cloud - as a Service (aaS) Model.
+/\ -> App											  	^
+|| -> Data											   	|
+|| -> Runtime							 ^			   	|
+|| -> Middleware						 |			   	|   Software
+|| -> operating System.					 |   Platform  	| as a Service
+|| -> virtualization.   ^				 | as a Service	|    (SaaS)
+|| -> Hardware          | Infrastructure |    (PaaS)   	|
+|| -> Storage           |  as a Service  |    		   	|
+\/ -> Network			| 	  (IaaS)	 |			   	|
