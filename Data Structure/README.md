@@ -36,7 +36,7 @@
 
 - **`Things Affect Program Speed & Efficiency :`**
     
-    ![Screen Shot 2024-05-29 at 2.55.08 PM.png](Data%20Structure%20ab21a3229ca840f1988de1c5587cec91/3e223723-2af8-498e-8778-2855824f67b0.png)
+    ![Screen Shot 2024-05-29 at 2.55.08 PM.png](img/3e223723-2af8-498e-8778-2855824f67b0.png)
     
     - **Time complexity:**  specifies how long it will take to execute an algorithm as a function of its input size.
     - **Space complexity:**  specifies the total amount of space or memory required to execute an algorithm as a function of the size of the input.
@@ -47,7 +47,7 @@
 - **Big O(log(n)) :**  This is typically seen in algorithms that break down the data into smaller chunks in each iteration, such as binary search.
 - **Which is Faster ?**
     
-    ![Screen Shot 2024-05-30 at 2.33.16 PM.png](Data%20Structure%20ab21a3229ca840f1988de1c5587cec91/Screen_Shot_2024-05-30_at_2.33.16_PM.png)
+    ![Screen Shot 2024-05-30 at 2.33.16 PM.png](img/Screen_Shot_2024-05-30_at_2.33.16_PM.png)
     
 
 ## 👉 **Stack :**
@@ -55,7 +55,7 @@
 > A stack is a linear data structure that follows the **Last-In-First-Out (LIFO)** principle. It behaves like a stack of plates, where the last plate added is the first one to be removed.
 > 
 > 
-> ![Screenshot 2024-06-22 205044.png](Data%20Structure%20ab21a3229ca840f1988de1c5587cec91/Screenshot_2024-06-22_205044.png)
+> ![Screenshot 2024-06-22 205044.png](img/Screenshot_2024-06-22_205044.png)
 > 
 > > **Key Operations on Stack Data Structures :**
 > > 
@@ -73,7 +73,7 @@
 > **Queue**  is a fundamental concept in computer science used for storing and managing data in a specific order. It follows the principle of “**First in, First out**” **(FIFO)**, where the first element added to the queue is the first one to be removed. Queues are commonly used in various algorithms and applications for their simplicity and efficiency in managing data flow.
 > 
 > 
-> ![Screenshot 2024-06-22 214144.png](Data%20Structure%20ab21a3229ca840f1988de1c5587cec91/Screenshot_2024-06-22_214144.png)
+> ![Screenshot 2024-06-22 214144.png](img/Screenshot_2024-06-22_214144.png)
 > 
 > > key operation  like stack.
 > > 
@@ -83,7 +83,7 @@
 > A **linked list**  is a fundamental data structure in computer science. It consists of nodes where each node contains **data** and a **reference (link)** to the next node in the sequence. This allows for dynamic memory allocation and efficient **insertion** and **deletion** operations compared to arrays.
 > 
 > 
-> ![LLdrawio.png](Data%20Structure%20ab21a3229ca840f1988de1c5587cec91/LLdrawio.png)
+> ![LLdrawio.png](img/LLdrawio.png)
 > 
 > Additionally, there are more types of linked lists available such as the doubly linked list and the circular linked list.
 > 
