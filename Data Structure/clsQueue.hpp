@@ -67,6 +67,10 @@ template <typename T> class	clsQueue
 		{
 			head.addFront(data);
 		}
+		bool	IsEmpty()
+		{
+			return head.IsEmpty();
+		}
 };
 
 // int main()
