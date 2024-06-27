@@ -3,14 +3,13 @@
 - **Wath is data structure ?**
     - A data structure is a specialized format for organizing, processing, retrieving and storing data. It provides a means to manage large amounts of data efficiently for uses such as large databases and internet indexing services.
 
-<aside>
-💡 **Differences between Data structure and Database ?**
 
->> Data structures : Data in RAM inside the program (temporary).
+- 💡 **Differences between Data structure and Database ?**
 
->> Database : Data In Hard Disk outside the program (Permenent).
+> Data structures : Data in RAM inside the program (temporary).
 
-</aside>
+> Database : Data In Hard Disk outside the program (Permenent).
+
 
 - **Classification of Data structure ?**
     - **Primitive (Basic) Data structure.**
