@@ -1,0 +1,7 @@
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\bin\Debug\startLearn.exe.config
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\bin\Debug\startLearn.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\bin\Debug\startLearn.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\obj\Debug\startLearn.csproj.AssemblyReference.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\obj\Debug\startLearn.csproj.CoreCompileInputs.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\obj\Debug\startLearn.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\startLearn\startLearn\obj\Debug\startLearn.pdb

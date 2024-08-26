@@ -1,0 +1,11 @@
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\bin\Debug\FirstWindowsApp.exe.config
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\bin\Debug\FirstWindowsApp.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\bin\Debug\FirstWindowsApp.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.csproj.AssemblyReference.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.Form1.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.Properties.Resources.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.csproj.GenerateResource.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.csproj.CoreCompileInputs.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\FirstWindowsApp\obj\Debug\FirstWindowsApp.Form2.resources
