@@ -1,0 +1,10 @@
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\bin\Debug\ProjectPizza.exe.config
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\bin\Debug\ProjectPizza.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\bin\Debug\ProjectPizza.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.csproj.AssemblyReference.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.Form1.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.Properties.Resources.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.csproj.GenerateResource.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.csproj.CoreCompileInputs.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\ProjectPizza\obj\Debug\ProjectPizza.pdb
