@@ -1,0 +1,10 @@
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\bin\Debug\AppLearnEnglish.exe.config
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\bin\Debug\AppLearnEnglish.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\bin\Debug\AppLearnEnglish.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.csproj.AssemblyReference.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.Form1.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.Properties.Resources.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.csproj.GenerateResource.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.csproj.CoreCompileInputs.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\AppLearnEnglish\obj\Debug\AppLearnEnglish.pdb

@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9B5EED4F-BD56-4DA7-BA4A-A0FB75163F8C}|AppLearnEnglish.csproj|C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9B5EED4F-BD56-4DA7-BA4A-A0FB75163F8C}|AppLearnEnglish.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B5EED4F-BD56-4DA7-BA4A-A0FB75163F8C}|AppLearnEnglish.csproj|c:\\users\\freem\\onedrive - university of the people\\desktop\\programming_advice\\l1-c#\\applearnenglish\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B5EED4F-BD56-4DA7-BA4A-A0FB75163F8C}|AppLearnEnglish.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAAAADwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T14:02:40.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\freem\\OneDrive - University of the People\\Desktop\\programming_advice\\l1-c#\\AppLearnEnglish\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T13:52:24.557Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

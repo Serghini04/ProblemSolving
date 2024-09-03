@@ -1,0 +1,10 @@
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\bin\Debug\Tic-Tac Game.exe.config
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\bin\Debug\Tic-Tac Game.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\bin\Debug\Tic-Tac Game.pdb
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic-Tac Game.csproj.AssemblyReference.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic_Tac_Game.Form1.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic_Tac_Game.Properties.Resources.resources
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic-Tac Game.csproj.GenerateResource.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic-Tac Game.csproj.CoreCompileInputs.cache
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic-Tac Game.exe
+C:\Users\freem\OneDrive - University of the People\Desktop\programming_advice\l1-c#\Tic-Tac Game\obj\Debug\Tic-Tac Game.pdb
