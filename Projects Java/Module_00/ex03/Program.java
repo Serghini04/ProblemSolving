@@ -19,10 +19,9 @@ public class Program
 			System.out.println(">");
 		}
 	}
-	private static int getMinimalGarad()
+	private static int getMinimalGrade()
 	{
 		int min = 10;
-		Scanner scanner = new Scanner(System.in);
 		for (int i = 0; i < 5; i++)
 		{
 			if (!scanner.hasNextInt())
@@ -33,7 +32,6 @@ public class Program
 			if (nb < min)
 				min = nb;
 		}
-
 		return min;
 	}
 	public static void main(String []arg)
@@ -45,7 +43,7 @@ public class Program
 		{
 			String week = "Week " + (index + 1);
 			if (week.equals(len))
-				minWeeksGrade[index] = getMinimalGarad();
+				minWeeksGrade[index] = getMinimalGrade();
 			else
 				putError();
 			index++;
