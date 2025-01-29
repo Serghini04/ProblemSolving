@@ -2,19 +2,56 @@ import java.util.Scanner;
 
 public class Program
 {
-	public static void main(String arg[])
+	static Scanner scanner = new Scanner(System.in);
+	private static void putError()
 	{
-		Scanner scanner = new Scanner(System.in);
-		int nb;
-		int[] minWeeksGrade = new int[18];
-		while ((nb = scanner.nextInt()) != 42)
+		System.err.println("IllegalArgument");
+		scanner.close();
+		System.exit(-1);
+	}
+	private static void progressVisualizationOfWeeks(int []minWeeksGrade, int size)
+	{
+		for (int i = 0 ; i < size; i++)
 		{
-			if (!scanner.hasNextInt()) {
-				System.err.println("IllegalArgument");
-				scanner.close();
-				System.exit(-1);
-			  }
+			System.out.print("Week " + (i + 1) + " ");
+			for (int j = 0; j < minWeeksGrade[i]; j++)
+				System.out.print("=");
+			System.out.println(">");
 		}
+	}
+	private static int getMinimalGarad()
+	{
+		int min = 10;
+		Scanner scanner = new Scanner(System.in);
+		for (int i = 0; i < 5; i++)
+		{
+			if (!scanner.hasNextInt())
+				putError();
+			int nb = scanner.nextInt();
+			if (nb < 1 || nb > 9)
+				putError();
+			if (nb < min)
+				min = nb;
+		}
+
+		return min;
+	}
+	public static void main(String []arg)
+	{
+		int index = 0;
+		int[] minWeeksGrade = new int[18];
+		String len;
+		while (!(len = scanner.nextLine()).equals("42"))
+		{
+			String week = "Week " + (index + 1);
+			if (week.equals(len))
+				minWeeksGrade[index] = getMinimalGarad();
+			else
+				putError();
+			index++;
+		}
+		progressVisualizationOfWeeks(minWeeksGrade, index);
+		scanner.close();
 		System.exit(0);
 	}
 }

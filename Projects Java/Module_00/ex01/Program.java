@@ -2,16 +2,21 @@ import java.util.Scanner;
 
 public class Program
 {
+	static Scanner scanner = new Scanner(System.in);
+	private static void putError()
+	{
+		System.err.println("IllegalArgument");
+		scanner.close();
+		System.exit(-1);
+	}
 	public static void main(String args[])	
 	{
-		Scanner scanner = new Scanner(System.in);
 		int nb = scanner.nextInt();
-		scanner.close();
+		if (!scanner.hasNextInt())
+			putError();
+		nb = scanner.nextInt();
 		if (nb <= 1)
-		{
-			System.err.println("IllegalArgument");
-			System.exit(-1);
-		}
+			putError();
 		int i = 2;
 		while (i * i <= nb)
 		{
@@ -23,6 +28,7 @@ public class Program
 			i++;
 		}
 		System.out.println("true " + (i - 1));
+		scanner.close();
 		System.exit(0);
 	}
 }

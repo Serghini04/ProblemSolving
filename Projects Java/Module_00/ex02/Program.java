@@ -2,6 +2,13 @@ import java.util.Scanner;
 
 public class Program
 {
+	static Scanner scanner = new Scanner(System.in);
+	private static void putError()
+	{
+		System.err.println("IllegalArgument");
+		scanner.close();
+		System.exit(-1);
+	}
 	private static int sumOfDigits(int nb)
 	{
 		int sum = 0;
@@ -28,13 +35,17 @@ public class Program
 		return true;
 	}
 
-	public static void	main(String arg[])
+	public static void	main(char[] arg[])
 	{
-		Scanner scanner = new Scanner(System.in);
 		int count = 0;
 		int nb;
-		while ((nb = scanner.nextInt()) != 42)
+		while (true)
 		{
+			if (!scanner.hasNextInt())
+				putError();
+			nb = scanner.nextInt();
+			if (nb == 42)
+				break ;
 			if (isPrime(sumOfDigits(nb)))
 				count++;
 		}
