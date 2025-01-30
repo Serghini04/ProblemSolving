@@ -1,21 +1,45 @@
-package Module_01.ex00;
-
 import java.util.UUID;
 
+
 public class Transaction
+
 {
+	public enum TransferCategory {
+		CREDIT("OUTCOME", ""),
+		DEBIT("INCOME", "+");
+	
+		private final String TEXT;
+		private final String SIGN;
+	
+		TransferCategory(String text, String sign) {
+			this.TEXT = text;
+			this.SIGN = sign;
+		}
+	
+		public String getText() {
+			return TEXT;
+		}
+	
+		public String getSign() {
+			return SIGN;
+		}
+	}
 	UUID	ID;
 	User	recipient; // User type;
 	User	send; // User type;
-	String	transferCategory; // debits ,ceredits
+	TransferCategory transferCategory; // debits ,ceredits
 	int		amount;
 	
-	public	Transaction(User recipient, User send, String transferCategory, int amount)
+	public	Transaction(User recipient, User send, int amount)
 	{
 		this.ID = UUID.randomUUID();
 		this.recipient = recipient;
 		this.send = send;
-		this.transferCategory = transferCategory;
+		if (amount > 0) {
+			setTransferCategory(TransferCategory.DEBIT);
+		} else {
+			setTransferCategory(TransferCategory.CREDIT);
+		}
 		this.amount = amount;
 	}
 	public	Transaction()
@@ -39,7 +63,7 @@ public class Transaction
         return send;
     }
 
-	public String getTransferCategory()
+	public TransferCategory getTransferCategory()
 	{
 		return transferCategory;
 	}
@@ -65,7 +89,7 @@ public class Transaction
         this.send = send;
     }
 
-	public void setTransferCategory(String transferCategory)
+	public void setTransferCategory(TransferCategory transferCategory)
 	{
 		this.transferCategory = transferCategory;
 	}
@@ -77,5 +101,10 @@ public class Transaction
 		send.setBalance(send.getBalance() - amount);
 		recipient.setBalance(recipient.getBalance() + amount);
 		return true;
+	}
+	@Override
+	public String toString() {
+		return (String.format("%s -> %s, %s%s, %s, %s", send.getName(), recipient.getName(), transferCategory.getSign(),
+				amount, transferCategory.getText(), ID));
 	}
 }

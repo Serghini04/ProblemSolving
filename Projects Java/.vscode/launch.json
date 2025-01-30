@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Pragram",
+      "request": "launch",
+      "mainClass": "Module_01.ex00.Pragram",
+      "projectName": "Projects Java_ae0df1b4"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",

@@ -1,21 +1,19 @@
-import java.util.UUID;
-
 public class User
 {
 	String name;
-	UUID ID;
+	int ID;
 	int balance;
 
 	public User(String name, int balance)
 	{
-		this.ID = UUID.randomUUID();
+		this.ID = UserIdsGenerator.getInstance().generatorId();
 		this.name = name;
 		this.balance = balance;
 	}
 
 	public User()
 	{
-		this.ID = UUID.randomUUID();
+		this.ID = UserIdsGenerator.getInstance().generatorId();
 	}
 
 	// Getters
@@ -24,7 +22,7 @@ public class User
 		return name;
 	}
 
-	public UUID getID()
+	public int getID()
 	{
 		return ID;
 	}
@@ -44,6 +42,7 @@ public class User
 	{
 		this.balance = balance;
 	}
+
 	@Override
 	public String toString() {
 		return (String.format("User ID = %s, Name  = %s, Balance = %s.", ID, name, balance));
