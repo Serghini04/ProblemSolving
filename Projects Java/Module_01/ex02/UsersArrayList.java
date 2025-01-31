@@ -43,7 +43,7 @@ public class UsersArrayList implements UsersList
 	}
 	
 	@Override
-	public User findUserById(int id) throws UserNotFoundException
+	public User findUserById(int id)
 	{
 		for (int i = 0; i < size; i++)
 		{

@@ -46,6 +46,6 @@ public class User
 	}
 	@Override
 	public String toString() {
-		return (String.format("User ID = %s, Name  = %s, Balance = %s.", ID, name, balance));
+		return (String.format("User ID = %s, Name = %s, Balance = %s.", ID, name, balance));
 	}
 }
