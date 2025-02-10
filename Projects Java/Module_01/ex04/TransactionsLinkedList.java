@@ -43,7 +43,7 @@ public class TransactionsLinkedList implements TransactionsList
     public void removeTransaction(UUID id) throws TransactionNotFoundException {
         if (header == null)
             throw new TransactionNotFoundException();
-        if (header.data.getID().equals(id))
+        if (header.data.getId().equals(id))
         {
             header = header.next;
             size--;
@@ -54,7 +54,7 @@ public class TransactionsLinkedList implements TransactionsList
         }
         Node tmp = header;
         while (tmp.next != null) {
-            if (tmp.next.data.getID().equals(id))
+            if (tmp.next.data.getId().equals(id))
             {
                 tmp.next = tmp.next.next;
                 size--;
@@ -81,6 +81,19 @@ public class TransactionsLinkedList implements TransactionsList
             i++;
         }
         return res;
+    }
+
+    @Override
+    public Transaction getTransactionById(UUID id)
+    {
+        Node tmp = header;
+        while (tmp != null)
+        {
+            if (tmp.data.getId().equals(id))
+                return tmp.data;
+            tmp = tmp.next;
+        }
+        throw new TransactionNotFoundException();
     }
 
     public class TransactionNotFoundException extends RuntimeException

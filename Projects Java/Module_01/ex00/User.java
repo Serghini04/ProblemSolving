@@ -24,7 +24,7 @@ public class User
 		return name;
 	}
 
-	public UUID getID()
+	public UUID getId()
 	{
 		return ID;
 	}

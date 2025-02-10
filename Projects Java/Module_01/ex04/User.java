@@ -25,7 +25,7 @@ public class User
 		return name;
 	}
 
-	public int getID()
+	public int getId()
 	{
 		return ID;
 	}
@@ -35,7 +35,7 @@ public class User
 		return balance;
 	}
 
-	public TransactionsList geTransactionsList()
+	public TransactionsList getTransactionsList()
 	{
 		return transactions;
 	}

@@ -47,7 +47,7 @@ public class UsersArrayList implements UsersList
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (users[i].getID() == id)
+			if (users[i].getId() == id)
 				return users[i];
 		}
 		throw new UserNotFoundException();

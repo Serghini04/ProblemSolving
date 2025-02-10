@@ -35,11 +35,10 @@ public class Transaction
 		this.ID = UUID.randomUUID();
 		this.recipient = recipient;
 		this.send = send;
-		if (amount > 0) {
+		if (amount > 0)
 			setTransferCategory(TransferCategory.DEBIT);
-		} else {
+		else
 			setTransferCategory(TransferCategory.CREDIT);
-		}
 		this.amount = amount;
 	}
 	public	Transaction()
@@ -48,7 +47,7 @@ public class Transaction
 	}
 
     // Getters
-    public UUID getID()
+    public UUID getId()
 	{
         return ID;
     }
@@ -58,7 +57,7 @@ public class Transaction
         return recipient;
     }
 
-    public User getSend()
+    public User getSender()
 	{
         return send;
     }

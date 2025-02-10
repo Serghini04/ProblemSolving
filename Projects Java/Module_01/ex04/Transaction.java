@@ -2,7 +2,6 @@ import java.util.UUID;
 
 
 public class Transaction
-
 {
 	public enum TransferCategory {
 		CREDIT("OUTCOME", ""),
@@ -35,11 +34,10 @@ public class Transaction
 		this.ID = id;
 		this.recipient = recipient;
 		this.send = send;
-		if (amount > 0) {
+		if (amount > 0)
 			setTransferCategory(TransferCategory.DEBIT);
-		} else {
+		else
 			setTransferCategory(TransferCategory.CREDIT);
-		}
 		this.amount = amount;
 	}
 	public	Transaction()
@@ -48,7 +46,7 @@ public class Transaction
 	}
 
     // Getters
-    public UUID getID()
+    public UUID getId()
 	{
         return ID;
     }
@@ -58,7 +56,7 @@ public class Transaction
         return recipient;
     }
 
-    public User getSend()
+    public User getSender()
 	{
         return send;
     }
@@ -93,15 +91,6 @@ public class Transaction
 	{
 		this.transferCategory = transferCategory;
 	}
-
-	// public boolean startTransaction()
-	// {
-	// 	if (send.getBalance() - amount < 0)
-	// 		return false;
-	// 	send.setBalance(send.getBalance() - amount);
-	// 	recipient.setBalance(recipient.getBalance() + amount);
-	// 	return true;
-	// }
 
 	@Override
 	public String toString() {
