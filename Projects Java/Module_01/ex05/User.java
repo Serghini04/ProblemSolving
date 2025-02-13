@@ -1,9 +1,9 @@
 public class User
 {
-	String name;
-	int ID;
-	int balance;
-	TransactionsList transactions;
+	private String name;
+	private int ID;
+	private int balance;
+	private TransactionsList transactions;
 
 	public User(String name, int balance)
 	{

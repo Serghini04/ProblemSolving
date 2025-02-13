@@ -10,7 +10,6 @@ public class Menu
 {
 	Modes mode;
 	TransactionsService transactionsService;
-	private Scanner scanner;
 
 	private final int	addUser = 1;
 	private final int	viewUserbalances = 2;
@@ -45,25 +44,106 @@ public class Menu
 			System.out.println("5. Finish execution");
 	}
 
+
+	private void addUser()
+	{
+		do
+		{
+			try
+			{
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user name and a balance :");
+				if (scanner.hasNextLine())
+				{
+					String[] input = scanner.nextLine().trim().split("\\s+");
+					if (input.length != 2)
+						throw new IllegalArgumentException();
+					String name = input[0];
+					int balance = Integer.parseInt(input[1]);
+					transactionsService.addUser(name, balance);
+					break ;
+				}
+				else {
+					System.err.println("* returning to the menu ↩ ");
+					break ;
+				}
+				
+			} catch (Exception e) {
+				System.err.println("Invalid Input");
+			}
+
+		} while (true);
+	}
+
+	private void	getUserBalance()
+	{
+		do
+		{
+			try
+			{
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user ID :");
+				if (!scanner.hasNextLine())
+				{
+					System.err.println("* returning to the menu ↩ ");
+					break ;
+				}
+				int id = Integer.parseInt(scanner.nextLine().trim());
+				transactionsService.getUserBalance(id);
+				break ;
+				
+			} catch (Exception e) {
+				System.err.println("Invalid Input");
+			}
+
+		} while (true);
+	}
+
+	private void	transferAmount()
+	{
+		do
+		{
+			try
+			{
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user ID :");
+				if (!scanner.hasNextLine())
+				{
+					System.err.println("* returning to the menu ↩ ");
+					break ;
+				}
+				String[] input = scanner.nextLine().trim().split("\\s+");
+				if (input.length != 3)
+					throw new IllegalArgumentException();
+				
+				break ;
+				
+			} catch (Exception e) {
+				System.err.println("Invalid Input");
+			}
+
+		} while (true);
+	}
+	
 	public void applyInput(int input)
 	{
 		switch (input)
 		{
 			case addUser :
-				transactionsService.addUser(scanner);
+				addUser();
 				break ;
 			case viewUserbalances :
-				transactionsService.getUserBalance(scanner);
+				getUserBalance();
 				break ;
 			case performTransfer :
-				transactionsService.transferAmount(scanner);
+				transferAmount();
 				break ;
-			case viewTransactionsUser :
-				transactionsService.findUserTransactions(scanner);
-				break ;
-			case removeTransfer :
-				transactionsService.removedUserTransaction(scanner);
-				break ;
+			// case viewTransactionsUser :
+			// 	transactionsService.findUserTransactions(scanner);
+			// 	break ;
+			// case removeTransfer :
+			// 	transactionsService.removedUserTransaction(scanner);
+			// 	break ;
 			default:
 				break;
 		}
@@ -72,32 +152,30 @@ public class Menu
 	public void readInput()
 	{
 		int input;
-		scanner = new Scanner(System.in);
-
-		while (true)
+		
+		do
 		{
-			printMenu();
-			if (!scanner.hasNext())
+			try
 			{
-				System.err.println("End of input detected. Exiting...");
-				break;
+				Scanner scanner = new Scanner(System.in);
+				printMenu();
+				if (!scanner.hasNextLine())
+					break;
+				else
+				{
+					input = Integer.parseInt(scanner.nextLine().trim());
+					if (!((mode.equals(Modes.Dev) && input >= 1 && input <= 7) || (mode.equals(Modes.Production) && input >= 1 && input <= 5)))
+						throw new IllegalArgumentException();
+					applyInput(input);
+				}
 			}
-			if (!scanner.hasNextInt())
+			catch(Exception e)
 			{
 				System.err.println("Invalid Input");
-				scanner.next();
-			}
-			else
-			{
-				input = scanner.nextInt();
-				if ((mode.equals(Modes.Dev) && input >= 1  && input <= 7) || ((mode.equals(Modes.Production) && input >= 1  && input <= 5)))
-					applyInput(input);
-				else
-					System.err.println("Invalid Input");
 			}
 			System.out.println("---------------------------------------------------------");
-		}
-		scanner.close();
-	}	
+		} while (true);
 
+		System.err.println("Exiting...");
+	}
 }

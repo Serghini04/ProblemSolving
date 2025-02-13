@@ -1,0 +1,28 @@
+	public void addUser() {
+		boolean valid = false;
+		while (!valid) {
+			try {
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user name and a balance");
+				if (scanner.hasNextLine()) {
+					String[] input = scanner.nextLine().trim().split("\\s+");
+					if (input.length == 2) {
+						String name = input[0];
+						int balance = Integer.parseInt(input[1]);
+						transactionsService.addUser(new User(name, balance));
+						valid = true;
+					}
+				} else {
+					System.err.println("-- Cancelled, return the menu ↩ ");
+					return;
+				}
+				if (!valid)
+					throw new IllegalArgumentException("Invalid input");
+			} catch (NumberFormatException e) {
+				System.err.println("Invalid balance");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+
+	};
