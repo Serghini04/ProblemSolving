@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.UUID;
 
 enum Modes
 {
@@ -106,7 +107,7 @@ public class Menu
 			try
 			{
 				Scanner scanner = new Scanner(System.in);
-				System.out.println("Enter a user ID :");
+				System.out.println("Enter a sender ID, a recipient ID, and a transfer amount :");
 				if (!scanner.hasNextLine())
 				{
 					System.err.println("* returning to the menu ↩ ");
@@ -115,7 +116,11 @@ public class Menu
 				String[] input = scanner.nextLine().trim().split("\\s+");
 				if (input.length != 3)
 					throw new IllegalArgumentException();
-				
+				int senderId = Integer.parseInt(input[0]);
+				int recipienterId = Integer.parseInt(input[1]);
+				int amount = Integer.parseInt(input[2]);
+				transactionsService.transferAmount(senderId, recipienterId, amount);
+				System.out.println("The transfer is completed");
 				break ;
 				
 			} catch (Exception e) {
@@ -125,6 +130,76 @@ public class Menu
 		} while (true);
 	}
 	
+	private	void	findUserTransactions()
+	{
+		do
+		{
+			try
+			{
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user ID :");
+				if (!scanner.hasNextLine())
+				{
+					System.err.println("* returning to the menu ↩ ");
+					break ;
+				}
+				int id = Integer.parseInt(scanner.nextLine().trim());
+				Transaction[] tr = transactionsService.findUserTransactions(id);
+				if (tr.length == 0)
+					System.out.println("Empty Transactions.");
+				for (int i = 0; i < tr.length; i++)
+					System.out.println("To (" + tr[i].getRecipient().getName() + " = " + tr[i].getRecipient().getId() + ") " + tr[i].getAmount() + " with id = " + tr[i].getId());
+				break ;
+			} catch (Exception e) {
+				System.err.println("Invalid Input");
+			}
+
+		} while (true);
+	}
+
+	private void removedUserTransaction()
+	{
+		do
+		{
+			try
+			{
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter a user ID and a transfer ID :");
+				if (!scanner.hasNextLine())
+				{
+					System.err.println("* returning to the menu ↩ ");
+					break ;
+				}
+				String[] input = scanner.nextLine().trim().split("\\s+");
+				if (input.length != 2)
+					throw new IllegalArgumentException();
+				int id = Integer.parseInt(input[0]);
+				UUID transactionId = UUID.fromString(input[1]);
+				System.err.println("Id (" +id+ ")==>(" + transactionId.toString()+ ").");
+				transactionsService.removedUserTransaction(id, transactionId);
+				break ;
+				
+			} catch (Exception e) {
+				System.err.println("Invalid Input1");
+				if (e.getMessage() != null);
+				System.err.println(e.getMessage());
+			}
+
+		} while (true);
+		System.err.println("Fuck");
+	}
+
+	public void transferValidity()
+	{
+		Transaction[] trs = transactionsService.getUnpairedTransactions();
+		if (trs.length == 0)
+			System.out.println("Empty Unpaired Transactions");
+		for (int i = 0; i < trs.length; i++)
+		{
+			System.out.println(trs[i].getRecipient().getName() + "(id = " + trs[i].getRecipient().getId() + ") as an unacknowledged transfer id = " + trs[i].getId() + " from " + trs[i].getSender().getName() + "(id = " + trs[i].getSender().getId() + ") for " + trs[i].getAmount() + ".");
+		}
+	}
+
 	public void applyInput(int input)
 	{
 		switch (input)
@@ -138,12 +213,18 @@ public class Menu
 			case performTransfer :
 				transferAmount();
 				break ;
-			// case viewTransactionsUser :
-			// 	transactionsService.findUserTransactions(scanner);
-			// 	break ;
-			// case removeTransfer :
-			// 	transactionsService.removedUserTransaction(scanner);
-			// 	break ;
+			case viewTransactionsUser :
+				findUserTransactions();
+				break ;
+			case removeTransfer :
+				removedUserTransaction();
+				break ;
+			case transferValidity :
+				transferValidity();
+				break;
+			case finishExecution :
+				System.err.println("Exiting...");
+				System.exit(0);
 			default:
 				break;
 		}
@@ -155,8 +236,8 @@ public class Menu
 		
 		do
 		{
-			try
-			{
+			// try
+			// {
 				Scanner scanner = new Scanner(System.in);
 				printMenu();
 				if (!scanner.hasNextLine())
@@ -168,11 +249,11 @@ public class Menu
 						throw new IllegalArgumentException();
 					applyInput(input);
 				}
-			}
-			catch(Exception e)
-			{
-				System.err.println("Invalid Input");
-			}
+			// }
+			// catch(Exception e)
+			// {
+			// 	System.err.println("Invalid Input");
+			// }
 			System.out.println("---------------------------------------------------------");
 		} while (true);
 

@@ -57,7 +57,7 @@ public class UsersArrayList implements UsersList
 	@Override
 	public User	findUserByIndex(int index)
 	{
-		if (index < 0 && index >= size)
+		if (index < 0 || index >= size)
 			throw new ArrayIndexOutOfBoundsException();
 		return users[index];
 	}

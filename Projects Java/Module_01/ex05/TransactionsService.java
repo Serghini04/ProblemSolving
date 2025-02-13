@@ -43,13 +43,10 @@ public class TransactionsService
 		User sender = users.findUserById(senderId);
 		User recipienter = users.findUserById(recipienterId);
 	
-		if (amount < 0 || sender.getBalance() - amount < 0)
-		{
-			System.err.println(amount + " | " + sender.getBalance());
+		if (amount <= 0 || sender.getBalance() - amount < 0)
 			throw new IllegalTransactionException();
-		}
 		UUID transactionId = UUID.randomUUID();
-		sender.getTransactionsList().addTransaction(new Transaction(sender, recipienter, -amount, transactionId));
+		sender.getTransactionsList().addTransaction(new Transaction(recipienter, sender, -amount, transactionId));
 		sender.setBalance(sender.getBalance()  - amount);
 		recipienter.getTransactionsList().addTransaction(new Transaction(recipienter, sender, amount, transactionId));
 		recipienter.setBalance(recipienter.getBalance()  + amount);
@@ -65,7 +62,6 @@ public class TransactionsService
 	{
 		User user = users.findUserById(userId);
 		Transaction toDelete = user.getTransactionsList().getTransactionById(transactionId);
-		
 		try
 		{
 			this.unpairedTransactions.removeTransaction(transactionId);
@@ -73,14 +69,14 @@ public class TransactionsService
 		catch (Exception e)
 		{
 			User secondUser = (userId == toDelete.getRecipient().getId())
-					? users.findUserByIndex(toDelete.getSender().getId())
-					: users.findUserByIndex(toDelete.getRecipient().getId());
+					? users.findUserById(toDelete.getSender().getId())
+					: users.findUserById(toDelete.getRecipient().getId());
 			Transaction toSave = ((TransactionsLinkedList) secondUser.getTransactionsList())
 					.getTransactionById(transactionId);
 			this.unpairedTransactions.addTransaction(toSave);
 		}
+		System.out.println("Transfer To " + toDelete.getRecipient().getName() + "(" + toDelete.getRecipient().getId() + ") " + -toDelete.getAmount() + " removed");
 		user.getTransactionsList().removeTransaction(transactionId);
-	
 	}
 
 	public Transaction[] getUnpairedTransactions() {

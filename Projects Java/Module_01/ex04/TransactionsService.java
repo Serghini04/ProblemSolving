@@ -69,8 +69,8 @@ public class TransactionsService
 		catch (Exception e)
 		{
 			User secondUser = (userId == toDelete.getRecipient().getId())
-					? users.findUserByIndex(toDelete.getSender().getId())
-					: users.findUserByIndex(toDelete.getRecipient().getId());
+					? users.findUserById(toDelete.getSender().getId())
+					: users.findUserById(toDelete.getRecipient().getId());
 			Transaction toSave = ((TransactionsLinkedList) secondUser.getTransactionsList())
 					.getTransactionById(transactionId);
 			this.unpairedTransactions.addTransaction(toSave);

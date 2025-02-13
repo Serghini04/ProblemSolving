@@ -41,32 +41,34 @@ public class TransactionsLinkedList implements TransactionsList
 
     @Override
     public void removeTransaction(UUID id) throws TransactionNotFoundException {
-        if (header == null)
+        if (header == null) {
             throw new TransactionNotFoundException();
-        if (header.data.getId().equals(id))
-        {
+        }
+        
+        if (header.data.getId().equals(id)) {
             header = header.next;
             size--;
-            if (header == null)
+            if (header == null) {
                 lastNode = null;
-            System.out.println("Transaction ID = [" + id + "] removed successfully.");
-            return;
+            }
+            return ;
         }
+        
         Node tmp = header;
         while (tmp.next != null) {
-            if (tmp.next.data.getId().equals(id))
-            {
+            if (tmp.next.data.getId().equals(id)) {
                 tmp.next = tmp.next.next;
                 size--;
                 if (tmp.next == null)
                     lastNode = tmp;
-                System.out.println("Transaction ID = [" + id + "] removed successfully.");
-                return;
+                return ;
             }
             tmp = tmp.next;
         }
+        System.err.println("Not delete");
         throw new TransactionNotFoundException();
     }
+    
 
     @Override
     public Transaction[] toArray()
@@ -90,7 +92,10 @@ public class TransactionsLinkedList implements TransactionsList
         while (tmp != null)
         {
             if (tmp.data.getId().equals(id))
+            {
+                System.err.println("Is Here");
                 return tmp.data;
+            }
             tmp = tmp.next;
         }
         throw new TransactionNotFoundException();
