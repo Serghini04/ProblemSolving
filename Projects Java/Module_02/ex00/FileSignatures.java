@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Map;
 
@@ -34,16 +35,23 @@ public class FileSignatures {
 	{
 		try
 		{
-			if (map.containsKey(line))
-				res.write((map.get(line) + "\n").getBytes());
-			for ()
+			Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+			while (it.hasNext())
+			{
+				Map.Entry<String, String> entry = it.next();
+				if (line.startsWith(entry.getKey())) {
+					res.write((entry.getValue() + "\n").getBytes());
+					return true;
+				}
+			}
+
 		}
 		catch(IOException e)
 		{
 			System.err.println(e.getMessage());
 			System.exit(1);
 		}
-		return true;
+		return false;
 	}
 
 	public void	readSignaturesFile()
@@ -60,11 +68,20 @@ public class FileSignatures {
 					throw new RuntimeException("Invalid Signature => (" + line + ").");
 				map.put(line.substring(pos + 1), line.substring(0, pos));
 			}
+			if (map.size() < 10)
+				throw new RuntimeException("The signatures file shall contain at least 10 different formats for analysis.");
 		}
 		catch (IOException e) {
 			System.err.println(e.getMessage());
 			System.exit(1);
 		}
+	}
+	private String bytesToHex(byte[] bytes) {
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(String.format("%02X", b));
+		}
+		return sb.toString();
 	}
 
 	private String	processedFile(String line)
@@ -75,7 +92,9 @@ public class FileSignatures {
 			byte []reads = new byte[8];
 			if (file.read(reads) == -1)
 				return "UNDEFINED";
-			getTypeOfExection(line);
+			String hexString = bytesToHex(reads); 
+			if (!getTypeOfExection(hexString))
+				return "UNDEFINED";
 		}
 		catch (IOException e)
 		{
