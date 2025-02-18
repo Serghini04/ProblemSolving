@@ -3,7 +3,7 @@ import java.io.File;
 
 public class MacroShell
 {
-	private final File path;
+	private File path;
 
 	public MacroShell(String arg)
 	{
@@ -27,27 +27,77 @@ public class MacroShell
             System.out.println("Failed to list files.");
 	}
 
-	private void cdCmd()
-	{
+	private void cdCmd(String[] line) {
+		File newDir = null;
+	
+		if (line.length == 1)
+		{
+			System.out.println("Usage: cd <FOLDER_NAME>");
+			return ;
+		}
+		else if (line[1].equals("..")) {
+			newDir = path.getParentFile();
+			if (newDir == null) {
+				System.err.println("cd: already at the root directory");
+				return;
+			}
+		} 
+		else
+			newDir = new File(path, line[1]);
 
+		if (newDir != null && newDir.exists() && newDir.isDirectory())
+			path = newDir;
+		else
+			System.err.println("cd: no such file or directory");
 	}
+
+	private void mvCmd(String[] line)
+	{
+		if (line.length < 3) {
+			System.err.println("mv: missing operand");
+			return;
+		}
+	
+		File source = new File(path, line[1]);
+		File destination = new File(line[2]);
+	
+		if (!source.exists()) {
+			System.err.println("mv: cannot move '" + line[1] + "': No such file or directory");
+			return;
+		}
+
+		if (!destination.isAbsolute())
+			destination = new File(path, line[2]);
+
+		if (destination.isDirectory())
+			destination = new File(destination, source.getName());
+
+		if (!source.renameTo(destination))
+			System.err.println("mv: failed to move '" + source.getName() + "'");
+	}
+	
+	
 	public void startReadInput()
 	{
 		Scanner scanner = new Scanner(System.in);
-		while (scanner.hasNextLine())
+
+		while (true)
 		{
+			System.out.print(path.getAbsolutePath() + ">> ");
+			if (!scanner.hasNextLine())
+				break ;
 			String []line = scanner.nextLine().trim().split("\\s+");
 			switch (line[0]) {
 				case "ls":
 					lsCmd();
 					break;
-					cdCmd();
+			
 				case "cd":
-
+					cdCmd(line);
 					break;
 				
 				case "mv":
-
+					mvCmd(line);
 					break;
 
 				default:
