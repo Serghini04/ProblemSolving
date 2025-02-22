@@ -4,25 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" rel="stylesheet"/>
+    
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         <aside>
             <div class="log">
                 <img src="imgs/img.png" width="50" height="50" alt="42 ..." />
                 <h2>Diha <span class="danger">Fkark</span></h2>
             </div>
+            
             <div class="close" id="close-btn">
-                <span class="material-icons-sharp">close</span>
+                <span class="material-symbols-outlined">close</span>
             </div>
-			<div class="sidebar">
-				<a href="#">
-					
-				</a>
-			</div>
+
+            <!-- Sidebar Links -->
+            <div class="sidebar">
+                <a href="#">
+                    <span class="material-symbols-outlined">home</span>
+                    <h3>Home</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">bar_chart</span>
+                    <h3>Workflows</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">key</span>
+                    <h3>Credentials</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">payments</span>
+                    <h3>Billing</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3>logout</h3>
+                </a>
+            </div>
         </aside>
     </div>
+
 </body>
 </html>
