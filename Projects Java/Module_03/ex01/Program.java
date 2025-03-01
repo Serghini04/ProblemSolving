@@ -1,7 +1,8 @@
-
-
+import java.util.concurrent.atomic.AtomicBoolean;
 public class Program
 {
+	public static AtomicBoolean	isEggTurn = new AtomicBoolean(true);
+
 	private static Integer parseInput(String []args)
 	{
 		Integer	time;
@@ -20,20 +21,13 @@ public class Program
 		try
 		{
 			Integer time = parseInput(args);
-			SynchronizationThread egg = new SynchronizationThread("Egg", time);
-			SynchronizationThread hen = new SynchronizationThread("Hen", time);
+			SynchronizationThread egg = new SynchronizationThread("Egg", time, isEggTurn);
+			SynchronizationThread hen = new SynchronizationThread("Hen", time, isEggTurn);
 			egg.start();
 			hen.start();
 
 			egg.join();  // Wait for egg to finish
             hen.join();  // Wait for hen to finish
-			while (time > 0)
-			{
-				System.out.println("Human");
-				Thread.sleep(50);
-				time--;
-			}
-
 		}
 		catch (Exception e)
 		{
