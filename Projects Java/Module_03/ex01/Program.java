@@ -1,4 +1,5 @@
 import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Program
 {
 	public static AtomicBoolean	isEggTurn = new AtomicBoolean(true);
@@ -13,6 +14,8 @@ public class Program
 			throw new RuntimeException("Usage: java Program --count={times}");
 
 		time = Integer.parseInt(args[0].substring(args[0].indexOf('=') + 1));
+		if (time <= 0)
+			throw new RuntimeException("Usage: time must be greate than 0");
 		return time;
 	}
 
