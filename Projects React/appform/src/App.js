@@ -3,10 +3,8 @@ import LoanForm from './LoanForm';
 
 function App() {
   return (
-    <div className="App" style={{marginTop:"250px"}}>
-      <LoanForm>
-
-      </LoanForm>
+    <div className="App">
+      <LoanForm />
     </div>
   );
 }
